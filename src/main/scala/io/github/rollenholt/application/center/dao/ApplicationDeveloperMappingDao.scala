@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
  * @author rollenholt 
  */
 @Repository
-trait ApplicationDao {
+trait ApplicationDeveloperMappingDao {
 
 }
