@@ -1,11 +1,11 @@
-package io.github.rollenholt.application.center.controller
+package io.github.rollenholt.application.center.base.controller
 
 import java.util
 import javax.annotation.Resource
 import javax.validation.Valid
 
-import io.github.rollenholt.application.center.model.Application
-import io.github.rollenholt.application.center.service.ApplicationService
+import io.github.rollenholt.application.center.base.model.Application
+import io.github.rollenholt.application.center.base.service.ApplicationService
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Controller
 import org.springframework.validation.{ObjectError, BindingResult}

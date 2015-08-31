@@ -19,3 +19,9 @@ create table application_developer_mapping(
   developer varchar(32) not null comment 'developer name',
   PRIMARY KEY (id)
 )engine=innodb default charset=utf8mb4 comment 'application developer mapping table';
+
+create table application_acl(
+  id int(10) unsigned not null AUTO_INCREMENT,
+
+
+)engine=innodb default charset=utf8mb4 comment 'application acl table';

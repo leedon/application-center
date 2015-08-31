@@ -1,9 +1,9 @@
-package io.github.rollenholt.application.center.service
+package io.github.rollenholt.application.center.base.service
 
 import javax.annotation.Resource
 
-import io.github.rollenholt.application.center.dao.ApplicationDao
-import io.github.rollenholt.application.center.model.Application
+import io.github.rollenholt.application.center.base.dao.ApplicationDao
+import io.github.rollenholt.application.center.base.model.Application
 import org.springframework.stereotype.Service
 
 /**

@@ -1,8 +1,8 @@
-package io.github.rollenholt.application.center.service
+package io.github.rollenholt.application.center.base.service
 
 import javax.annotation.Resource
 
-import io.github.rollenholt.application.center.model.ApplicationDeveloperMapping
+import io.github.rollenholt.application.center.base.model.ApplicationDeveloperMapping
 import org.springframework.stereotype.Service
 
 /**

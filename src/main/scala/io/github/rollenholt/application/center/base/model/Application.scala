@@ -1,4 +1,4 @@
-package io.github.rollenholt.application.center.model
+package io.github.rollenholt.application.center.base.model
 
 import java.util.Date
 
