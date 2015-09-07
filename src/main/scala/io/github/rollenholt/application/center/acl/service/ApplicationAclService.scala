@@ -2,6 +2,8 @@ package io.github.rollenholt.application.center.acl.service
 
 import org.springframework.stereotype.Service
 
+import scala.collection.mutable.ListBuffer
+
 /**
  * @author rollenholt 
  */
@@ -16,7 +18,7 @@ class ApplicationAclService {
    * @return 根据选项,返回查询到的ip配置信息
    */
   def fetchIpConfig(applicationCode: String, url: String, isWhiteList: Boolean): List[String] = {
-
+    List()
   }
 
   /**
@@ -25,7 +27,7 @@ class ApplicationAclService {
    * @param url 资源url
    * @param isWhiteList true表示白名单,false表示黑名单
    */
-  def ipConfig(applicationCode:String, url:String, isWhiteList:Boolean) = {
+  def ipConfig(applicationCode: String, url: String, isWhiteList: Boolean) = {
 
   }
 
@@ -33,7 +35,7 @@ class ApplicationAclService {
    * 这样配置的话,此应用中所有的资源都可以被applicationCode这个应用所访问
    * @param applicationCode 应用编码
    */
-  def applicationConfig(applicationCode:String) = {
+  def applicationConfig(applicationCode: String) = {
 
   }
 

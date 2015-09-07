@@ -10,6 +10,7 @@ create table application(
   create_time datetime not null comment 'create time',
   state tinyint(4) not null comment 'application apply state',
   email_group varchar(32) not null comment 'team email group',
+  is_join_iconfig tinyint(4) not null DEFAULT 0 comment 'is join iconfig',
   PRIMARY KEY (id)
 )engine=innodb default charset=utf8mb4 comment 'application table';
 
