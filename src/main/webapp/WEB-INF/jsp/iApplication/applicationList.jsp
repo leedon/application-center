@@ -47,42 +47,8 @@
 
     <hr class="featurette-divider">
 
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">界面简洁. <span class="text-muted">使用方便.</span></h2>
-            <p class="lead">不信你试试看</p>
-        </div>
-        <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7 col-md-push-5">
-            <h2 class="featurette-heading">功能强大. <span class="text-muted">操作简单.</span></h2>
-            <p class="lead">无论是iApplication还是iConfig，都是你必不可少的工具.</p>
-        </div>
-        <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">强力的开发者持续维护. <span class="text-muted">快速响应.</span></h2>
-            <p class="lead">7x24小时</p>
-        </div>
-        <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-    </div>
-
-    <hr class="featurette-divider">
-
+    asdasasdas
+    asdas
 
 
     <footer>

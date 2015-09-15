@@ -59,6 +59,11 @@ class ApplicationCenterController {
 
   }
 
+  @RequestMapping(value = Array("/list"), method = Array(RequestMethod.GET))
+  def approveApply():String = {
+    "/iApplication/applicationList"
+  }
+
 
 
 }
