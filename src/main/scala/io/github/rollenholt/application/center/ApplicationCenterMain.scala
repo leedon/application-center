@@ -12,6 +12,6 @@ class ApplicationCenterMain extends SpringBootServletInitializer{}
 
 object ApplicationCenterMain{
   def main(args: Array[String]) {
-    SpringApplication.run(classOf[ApplicationCenterMain]);
+    SpringApplication.run(classOf[ApplicationCenterMain])
   }
 }
