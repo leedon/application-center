@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="GB2312">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="../../favicon.ico">
@@ -49,8 +49,8 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading">½çÃæ¼ò½à. <span class="text-muted">Ê¹ÓÃ·½±ã.</span></h2>
-            <p class="lead">²»ÐÅÄãÊÔÊÔ¿´</p>
+            <h2 class="featurette-heading">ç•Œé¢ç®€æ´ <span class="text-muted">ç¬¦åˆå®¡ç¾Ž</span></h2>
+            <p class="lead">ä¸ä¿¡ä½ è¯•è¯•</p>
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
@@ -61,8 +61,8 @@
 
     <div class="row featurette">
         <div class="col-md-7 col-md-push-5">
-            <h2 class="featurette-heading">¹¦ÄÜÇ¿´ó. <span class="text-muted">²Ù×÷¼òµ¥.</span></h2>
-            <p class="lead">ÎÞÂÛÊÇiApplication»¹ÊÇiConfig£¬¶¼ÊÇÄã±Ø²»¿ÉÉÙµÄ¹¤¾ß.</p>
+            <h2 class="featurette-heading">åŠŸèƒ½ä½¿ç”¨. <span class="text-muted">æ²¡æœ‰æµ®å¤¸çš„åŠŸèƒ½</span></h2>
+            <p class="lead">å®Œå…¨ä»Žå®žé™…åº”ç”¨åœºæ™¯å‡ºå‘.</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
             <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
@@ -73,8 +73,8 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading">Ç¿Á¦µÄ¿ª·¢Õß³ÖÐøÎ¬»¤. <span class="text-muted">¿ìËÙÏìÓ¦.</span></h2>
-            <p class="lead">7x24Ð¡Ê±</p>
+            <h2 class="featurette-heading">æœåŠ¡å®Œå–„ <span class="text-muted">å¼ºåŠ›çš„å¼€å‘äººå‘˜</span></h2>
+            <p class="lead">7x24å°æ—¶</p>
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
