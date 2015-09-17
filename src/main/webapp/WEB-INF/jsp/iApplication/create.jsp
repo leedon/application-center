@@ -11,22 +11,27 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/carousel.css" rel="stylesheet">
 
+    <script src="../../../js/jquery.min.js"></script>
+    <script src="../../../js/bootstrap.min.js"></script>
+
     <script>
-        $(document).ready(function(){
-
-        })
-
         function createApplication(){
+            console.log($("#applicationCreateForm").serialize())
             $.ajax({
                 type: 'post',
+                cache : false,
                 url: '/application/center/create',
-                data: $("applicationCreateForm").serialize(),
-                success: function(data) {
-                    alert("应用创建成功");
-                    window.location.href = "/application/center/list"
+                data: $("#applicationCreateForm").serialize(),
+                error : function (request) {
+                    alert("form submit error, please retry or contact system admin.")
                 },
-                error: function () {
-                    alert("应用创建失败，请联系系统管理员");
+                success : function(data) {
+                    console.log(data);
+                    if(data.code == 0){
+                        window.location.href = "/application/center/list";
+                    } else {
+                        alert(data.msg + "\n" + data.data);
+                    }
                 }
             });
         }
@@ -73,20 +78,20 @@
     <form role="form" style="position: relative; left:20%;" id="applicationCreateForm">
         <div class="form-group">
             <label for="applicationName">应用名称:</label>
-            <input type="text" class="form-control" maxlength="20" size="30px" id="applicationName">
+            <input type="text" class="form-control" maxlength="20" size="30px" name="name" id="applicationName">
         </div>
         <div class="form-group">
             <label for="applicationCode">应用编号:</label>
-            <input type="text" class="form-control" maxlength="20" size="30px" id="applicationCode">
+            <input type="text" class="form-control" maxlength="20" size="30px" name="code" id="applicationCode">
         </div>
         <div class="form-group">
             <label for="emailGroup">邮件组:</label>
-            <input type="email" class="form-control" maxlength="20" size="30px" id="emailGroup">
+            <input type="email" class="form-control" maxlength="20" size="30px" name="emailGroup" id="emailGroup">
         </div>
         <div class="form-group">
             <label for="applicationHead">应用负责人:</label>
             <span class="label label-info">负责人之间使用/分割</span>
-            <input type="text" class="form-control"  size="30px" id="applicationHead">
+            <input type="text" class="form-control"  size="30px" name="developers" id="applicationHead">
         </div>
         <button type="button" class="btn btn-default" onclick="createApplication()">Submit</button>
     </form>
@@ -101,8 +106,7 @@
 <!-- /.container -->
 
 
-<script src="../../../js/jquery.min.js"></script>
-<script src="../../../js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

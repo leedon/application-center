@@ -4,12 +4,13 @@ import javax.annotation.Resource
 import javax.validation.Valid
 
 import com.rollenholt.pear.pojo.JsonV2
-import io.github.rollenholt.application.center.base.model.ApplicationVo
+import io.github.rollenholt.application.center.base.model.{ApplicationVo}
 import io.github.rollenholt.application.center.base.service.ApplicationService
 import org.slf4j.{Logger, LoggerFactory}
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.validation.{BindingResult, ObjectError}
-import org.springframework.web.bind.annotation.{PathVariable, RequestMapping, RequestMethod, ResponseBody}
+import org.springframework.web.bind.annotation._
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable
@@ -32,23 +33,33 @@ class ApplicationCenterController {
     "iApplication/create"
   }
 
+//  @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
+//  @ResponseBody
+//  def createApplication(@Validated @RequestBody application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+//    logger.info("鎺ユ敹鍒板弬鏁帮細{}", application)
+//    if (bindingResult.hasErrors) {
+//      val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
+//        error.getCode
+//      })
+//      new JsonV2(-1, "argument error", errors)
+//    }
+//    applicationService.createApplication(application)
+//    new JsonV2(0, "ok", application.code)
+//  }
+
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def createApplication(@Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
-    logger.info("接收到参数：{}", application)
-    if (bindingResult.hasErrors) {
-      val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
-        error.getCode
-      })
-      new JsonV2(-1, "argument error", errors)
-    }
-    applicationService.createApplication(application)
+  @ResponseStatus(HttpStatus.OK)
+  def createApplication( application: ApplicationVo): JsonV2[String] = {
+    logger.info("鎺ユ敹鍒板弬鏁帮細{}", application)
+
+//    applicationService.createApplication(application)
     new JsonV2(0, "ok", application.code)
   }
 
   @RequestMapping(value = Array("/modify"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def modifyApplication(@Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+  def modifyApplication(@Valid @RequestBody application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
         error.getCode
