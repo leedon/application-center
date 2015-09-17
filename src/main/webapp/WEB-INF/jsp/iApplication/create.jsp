@@ -10,6 +10,7 @@
 
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/carousel.css" rel="stylesheet">
+    <link href="../../../css/bootstrap-responsive.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -48,51 +49,22 @@
 
 <div class="container marketing">
     <hr class="featurette-divider">
-    <h3>应用列表</h3>
-    <di>
-        <form class="form-inline">
-            <div class="input-append">
-                <input class="span2" id="appendedInputButtons" type="text">
-                <button class="btn btn-primary" type="submit">搜索</button>
-                <a class="btn btn-primary" type="button" href="/application/center/render/create">创建应用</a>
-            </div>
-        </form>
-    </di>
+    <h3>创建应用</h3>
 
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>应用名称</th>
-                <th>应用编号</th>
-                <th>邮件组</th>
-                <th>创建人</th>
-                <th>创建时间</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-       <tbody>
-           <tr>
-               <td>应用名称</td>
-               <td>应用编号</td>
-               <td>邮件组</td>
-               <td>创建人</td>
-               <td>创建时间</td>
-               <td>
-                   <a href="#" role="button">详情</a>
-               </td>
-           </tr>
-           <tr>
-               <td>应用名称</td>
-               <td>应用编号</td>
-               <td>邮件组</td>
-               <td>创建人</td>
-               <td>创建时间</td>
-               <td>
-                   <a href="#" role="button">详情</a>
-               </td>
-           </tr>
-       </tbody>
-    </table>
+    <form role="form">
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" maxlength="20" size="30px" id="email">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 
     <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>

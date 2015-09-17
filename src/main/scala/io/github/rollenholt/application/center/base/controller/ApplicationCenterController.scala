@@ -21,15 +21,21 @@ import scala.collection.mutable
 @RequestMapping(value = Array("/application/center"))
 class ApplicationCenterController {
 
-  private[this] val logger:Logger = LoggerFactory.getLogger(classOf[ApplicationCenterController])
+  private[this] val logger: Logger = LoggerFactory.getLogger(classOf[ApplicationCenterController])
 
   @Resource
   private[this] val applicationService: ApplicationService = null
 
+
+  @RequestMapping(value = Array("/render/create"), method = Array(RequestMethod.GET))
+  def renderCreatePage() = {
+    "iApplication/create"
+  }
+
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
   def createApplication(@Valid application: Application, bindingResult: BindingResult): JsonV2[String] = {
-    if(bindingResult.hasErrors) {
+    if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
         error.getCode
       })
@@ -42,7 +48,7 @@ class ApplicationCenterController {
   @RequestMapping(value = Array("/modify"), method = Array(RequestMethod.POST))
   @ResponseBody
   def modifyApplication(@Valid application: Application, bindingResult: BindingResult): JsonV2[String] = {
-    if(bindingResult.hasErrors) {
+    if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
         error.getCode
       })
@@ -60,10 +66,9 @@ class ApplicationCenterController {
   }
 
   @RequestMapping(value = Array("/list"), method = Array(RequestMethod.GET))
-  def approveApply():String = {
+  def approveApply(): String = {
     "/iApplication/applicationList"
   }
-
 
 
 }
