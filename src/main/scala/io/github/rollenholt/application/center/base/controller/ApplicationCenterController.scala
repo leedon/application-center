@@ -4,7 +4,7 @@ import javax.annotation.Resource
 import javax.validation.Valid
 
 import com.rollenholt.pear.pojo.JsonV2
-import io.github.rollenholt.application.center.base.model.Application
+import io.github.rollenholt.application.center.base.model.ApplicationVo
 import io.github.rollenholt.application.center.base.service.ApplicationService
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Controller
@@ -34,7 +34,8 @@ class ApplicationCenterController {
 
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def createApplication(@Valid application: Application, bindingResult: BindingResult): JsonV2[String] = {
+  def createApplication(@Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+    logger.info("接收到参数：{}", application)
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
         error.getCode
@@ -47,7 +48,7 @@ class ApplicationCenterController {
 
   @RequestMapping(value = Array("/modify"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def modifyApplication(@Valid application: Application, bindingResult: BindingResult): JsonV2[String] = {
+  def modifyApplication(@Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
         error.getCode
