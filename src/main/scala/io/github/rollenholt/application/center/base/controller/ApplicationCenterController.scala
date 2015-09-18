@@ -37,7 +37,7 @@ class ApplicationCenterController {
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
   def createApplication(@Validated application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
-    logger.info("接收到参数：{}", application)
+    logger.debug("接收到参数：{}", application)
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
         error.getCode
@@ -50,7 +50,7 @@ class ApplicationCenterController {
 
   @RequestMapping(value = Array("/modify"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def modifyApplication(@Valid @RequestBody application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+  def modifyApplication(@Validated application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
         error.getCode
