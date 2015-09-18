@@ -15,19 +15,36 @@
     <script src="/js/bootstrap.min.js"></script>
 
     <script>
-        function createApplication(){
-            console.log($("#applicationCreateForm").serialize())
+
+        $(document).ready(function () {
+            var applicationCode = window.location.pathname.split("/").reverse()[0];
+            $.ajax({
+                type: 'get',
+                cache: false,
+                dataType: 'json',
+                url: '/application/center/detail/' + applicationCode,
+                success: function (data) {
+                    $("#applicationName").val(data.data.name)
+                    $("#applicationCode").val(data.data.code)
+                    $("#emailGroup").val(data.data.emailGroup)
+                    $("#applicationHead").val(data.data.developers)
+                }
+            })
+        })
+
+        function modifyApplication() {
+            console.log($("#applicationModifyForm").serialize())
             $.ajax({
                 type: 'post',
-                cache : false,
-                url: '/application/center/create',
-                data: $("#applicationCreateForm").serialize(),
-                error : function (request) {
+                cache: false,
+                url: '/application/center/modify',
+                data: $("#applicationModifyForm").serialize(),
+                error: function (request) {
                     alert("form submit error, please retry or contact system admin.")
                 },
-                success : function(data) {
+                success: function (data) {
                     console.log(data);
-                    if(data.code == 0){
+                    if (data.code == 0) {
                         window.location.href = "/application/center/list";
                     } else {
                         alert(data.msg + "\n" + data.data);
@@ -73,16 +90,16 @@
 
 <div class="container marketing">
     <hr class="featurette-divider">
-    <h3>创建应用</h3>
+    <h3>修改应用</h3>
 
-    <form role="form" style="position: relative; left:20%;" id="applicationCreateForm">
+    <form role="form" style="position: relative; left:20%;" id="applicationModifyForm">
         <div class="form-group">
             <label for="applicationName">应用名称:</label>
             <input type="text" class="form-control" maxlength="20" size="30px" name="name" id="applicationName">
         </div>
         <div class="form-group">
             <label for="applicationCode">应用编号:</label>
-            <input type="text" class="form-control" maxlength="20" size="30px" name="code" id="applicationCode">
+            <input type="text" class="form-control" maxlength="20" size="30px" name="code" id="applicationCode" readonly>
         </div>
         <div class="form-group">
             <label for="emailGroup">邮件组:</label>
@@ -91,9 +108,9 @@
         <div class="form-group">
             <label for="applicationHead">应用负责人:</label>
             <span class="label label-info">负责人之间使用/分割</span>
-            <input type="text" class="form-control"  size="30px" name="developers" id="applicationHead">
+            <input type="text" class="form-control" size="30px" name="developers" id="applicationHead">
         </div>
-        <button type="button" class="btn btn-default" onclick="createApplication()">Submit</button>
+        <button type="button" class="btn btn-default" onclick="modifyApplication()">Submit</button>
     </form>
 
     <footer>
@@ -104,8 +121,6 @@
 
 </div>
 <!-- /.container -->
-
-
 
 
 </body>

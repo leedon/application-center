@@ -8,11 +8,33 @@
 
     <title>Application-Center</title>
 
-    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../css/carousel.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/carousel.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            var applicationCode = window.location.pathname.split("/").reverse()[0];
+            $.ajax({
+                type: 'get',
+                cache: false,
+                dataType: 'json',
+                url: '/application/center/detail/' + applicationCode,
+                success: function (data) {
+                    $("#applicationName").val(data.data.name)
+                    $("#applicationCode").val(data.data.code)
+                    $("#emailGroup").val(data.data.emailGroup)
+                    $("#applicationHead").val(data.data.developers)
+                }
+            })
+        })
+
+    </script>
 </head>
 <body>
-
 
 <div class="navbar-wrapper">
     <div class="container">
@@ -48,52 +70,27 @@
 
 <div class="container marketing">
     <hr class="featurette-divider">
-    <h3>应用列表</h3>
-    <di>
-        <form class="form-inline">
-            <div class="input-append">
-                <input class="span2" id="appendedInputButtons" type="text">
-                <button class="btn btn-primary" type="submit">搜索</button>
-                <a class="btn btn-primary" type="button" href="/application/center/render/create">创建应用</a>
-            </div>
-        </form>
-    </di>
+    <h3>预览应用</h3>
 
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>应用名称</th>
-                <th>应用编号</th>
-                <th>邮件组</th>
-                <th>创建人</th>
-                <th>创建时间</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-       <tbody>
-           <tr>
-               <td>应用名称</td>
-               <td>应用编号</td>
-               <td>邮件组</td>
-               <td>创建人</td>
-               <td>创建时间</td>
-               <td>
-                   <a href="/application/center/render/preview/12" role="button">详情</a>
-                   <a href="/application/center/render/modify/12" role="button">修改</a>
-               </td>
-           </tr>
-           <tr>
-               <td>应用名称</td>
-               <td>应用编号</td>
-               <td>邮件组</td>
-               <td>创建人</td>
-               <td>创建时间</td>
-               <td>
-                   <a href="#" role="button">详情</a>
-               </td>
-           </tr>
-       </tbody>
-    </table>
+    <form role="form" style="position: relative; left:20%;" id="applicationPreviewForm">
+        <div class="form-group">
+            <label for="applicationName">应用名称:</label>
+            <input type="text" class="form-control" maxlength="20" size="30px" name="name" id="applicationName" readonly>
+        </div>
+        <div class="form-group">
+            <label for="applicationCode">应用编号:</label>
+            <input type="text" class="form-control" maxlength="20" size="30px" name="code" id="applicationCode" readonly>
+        </div>
+        <div class="form-group">
+            <label for="emailGroup">邮件组:</label>
+            <input type="email" class="form-control" maxlength="20" size="30px" name="emailGroup" id="emailGroup" readonly>
+        </div>
+        <div class="form-group">
+            <label for="applicationHead">应用负责人:</label>
+            <span class="label label-info">负责人之间使用/分割</span>
+            <input type="text" class="form-control" size="30px" name="developers" id="applicationHead" readonly>
+        </div>
+    </form>
 
     <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -104,9 +101,6 @@
 </div>
 <!-- /.container -->
 
-
-<script src="../../../js/jquery.min.js"></script>
-<script src="../../../js/bootstrap.min.js"></script>
 
 </body>
 </html>
