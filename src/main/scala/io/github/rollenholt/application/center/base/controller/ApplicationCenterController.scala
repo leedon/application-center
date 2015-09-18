@@ -9,6 +9,7 @@ import io.github.rollenholt.application.center.base.service.ApplicationService
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
+import org.springframework.validation.annotation.Validated
 import org.springframework.validation.{BindingResult, ObjectError}
 import org.springframework.web.bind.annotation._
 
@@ -33,27 +34,17 @@ class ApplicationCenterController {
     "iApplication/create"
   }
 
-//  @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
-//  @ResponseBody
-//  def createApplication(@Validated @RequestBody application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
-//    logger.info("接收到参数：{}", application)
-//    if (bindingResult.hasErrors) {
-//      val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
-//        error.getCode
-//      })
-//      new JsonV2(-1, "argument error", errors)
-//    }
-//    applicationService.createApplication(application)
-//    new JsonV2(0, "ok", application.code)
-//  }
-
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
-  @ResponseStatus(HttpStatus.OK)
-  def createApplication( application: ApplicationVo): JsonV2[String] = {
+  def createApplication(@Validated application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
     logger.info("接收到参数：{}", application)
-
-//    applicationService.createApplication(application)
+    if (bindingResult.hasErrors) {
+      val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
+        error.getCode
+      })
+      new JsonV2(-1, "argument error", errors)
+    }
+    applicationService.createApplication(application)
     new JsonV2(0, "ok", application.code)
   }
 
