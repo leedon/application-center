@@ -1,13 +1,11 @@
 package io.github.rollenholt.application.center.base.controller
 
 import javax.annotation.Resource
-import javax.validation.Valid
 
 import com.rollenholt.pear.pojo.JsonV2
 import io.github.rollenholt.application.center.base.model.{ApplicationVo}
 import io.github.rollenholt.application.center.base.service.ApplicationService
 import org.slf4j.{Logger, LoggerFactory}
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.validation.annotation.Validated
 import org.springframework.validation.{BindingResult, ObjectError}
