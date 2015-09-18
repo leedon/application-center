@@ -14,38 +14,47 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
-
     <script>
 
         $(document).ready(function () {
+            var applicationCode = window.location.pathname.split("/").reverse()[0];
             $.ajax({
                 type: 'get',
                 cache: false,
                 dataType: 'json',
-                url: '/application/center/application/list',
+                url: '/application/center/detail/' + applicationCode,
                 success: function (data) {
-                    var applicationVos = data.data;
-                    for(var i = 0; i< applicationVos.length; i++){
-                        var data = applicationVos[i]
-                        $("table tbody").append(
-                                "<tr>" +
-                                    "<td>" + data.name +  "</td><td>" + data.code + "</td>" +
-                                    "<td>" + data.emailGroup + "</td>" +
-                                    "<td>" +
-                                        "<a href=\"/application/center/render/preview/" + data.code +"\" role=\"button\">详情</a> " +
-                                        "<a href=\"/application/center/render/modify/"+ data.code + "\" role=\"button\">修改</a>" +
-                                    "</td>" +
-                                "</tr>");
-                    }
+                    $("#applicationName").val(data.data.name)
+                    $("#applicationCode").val(data.data.code)
+                    $("#emailGroup").val(data.data.emailGroup)
+                    $("#applicationHead").val(data.data.developers)
                 }
             })
         })
 
+        function modifyApplication() {
+            console.log($("#applicationModifyForm").serialize())
+            $.ajax({
+                type: 'post',
+                cache: false,
+                url: '/application/center/modify',
+                data: $("#applicationModifyForm").serialize(),
+                error: function (request) {
+                    alert("form submit error, please retry or contact system admin.")
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 0) {
+                        window.location.href = "/application/center/list";
+                    } else {
+                        alert(data.msg + "\n" + data.data);
+                    }
+                }
+            });
+        }
     </script>
-
 </head>
 <body>
-
 
 <div class="navbar-wrapper">
     <div class="container">
@@ -81,29 +90,28 @@
 
 <div class="container marketing">
     <hr class="featurette-divider">
-    <h3>应用列表</h3>
-    <di>
-        <form class="form-inline">
-            <div class="input-append">
-                <input class="span2" id="appendedInputButtons" type="text">
-                <button class="btn btn-primary" type="submit">搜索</button>
-                <a class="btn btn-primary" type="button" href="/application/center/render/create">创建应用</a>
-            </div>
-        </form>
-    </di>
+    <h3>修改应用</h3>
 
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>应用名称</th>
-                <th>应用编号</th>
-                <th>邮件组</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-       <tbody>
-       </tbody>
-    </table>
+    <form role="form" style="position: relative; left:20%;" id="applicationModifyForm">
+        <div class="form-group">
+            <label for="applicationName">应用名称:</label>
+            <input type="text" class="form-control" maxlength="20" size="30px" name="name" id="applicationName">
+        </div>
+        <div class="form-group">
+            <label for="applicationCode">应用编号:</label>
+            <input type="text" class="form-control" maxlength="20" size="30px" name="code" id="applicationCode" readonly>
+        </div>
+        <div class="form-group">
+            <label for="emailGroup">邮件组:</label>
+            <input type="email" class="form-control" maxlength="20" size="30px" name="emailGroup" id="emailGroup">
+        </div>
+        <div class="form-group">
+            <label for="applicationHead">应用负责人:</label>
+            <span class="label label-info">负责人之间使用/分割</span>
+            <input type="text" class="form-control" size="30px" name="developers" id="applicationHead">
+        </div>
+        <button type="button" class="btn btn-default" onclick="modifyApplication()">Submit</button>
+    </form>
 
     <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -113,7 +121,6 @@
 
 </div>
 <!-- /.container -->
-
 
 
 </body>

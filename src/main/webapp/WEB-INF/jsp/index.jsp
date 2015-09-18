@@ -12,6 +12,8 @@
     <link href="../../css/carousel.css" rel="stylesheet">
 </head>
 <body>
+
+
 <div class="navbar-wrapper">
     <div class="container">
 
