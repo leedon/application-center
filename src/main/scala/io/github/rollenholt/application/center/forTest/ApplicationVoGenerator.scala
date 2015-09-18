@@ -15,4 +15,13 @@ object ApplicationVoGenerator {
       vo.developers = "wenchao/rollenholt"
       vo
     }
+
+  def generateList() = {
+    val vo: ApplicationVo = new ApplicationVo
+    vo.code = "applicationCode"
+    vo.name = "applicationName"
+    vo.emailGroup = "1@qq.com"
+    vo.developers = "wenchao/rollenholt"
+    List(vo, vo, vo)
+  }
 }

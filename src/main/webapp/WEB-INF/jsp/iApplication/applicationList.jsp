@@ -8,8 +8,41 @@
 
     <title>Application-Center</title>
 
-    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../css/carousel.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/carousel.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: 'get',
+                cache: false,
+                dataType: 'json',
+                url: '/application/center/application/list',
+                success: function (data) {
+                    var applicationVos = data.data;
+                    for(var i = 0; i< applicationVos.length; i++){
+                        var data = applicationVos[i]
+                        $("table tbody").append(
+                                "<tr>" +
+                                    "<td>" + data.name +  "</td><td>" + data.code + "</td>" +
+                                    "<td>" + data.emailGroup + "</td>" +
+                                    "<td>" +
+                                        "<a href=\"/application/center/render/preview/" + data.code +"\" role=\"button\">详情</a> " +
+                                        "<a href=\"/application/center/render/modify/"+ data.code + "\" role=\"button\">修改</a>" +
+                                    "</td>" +
+                                "</tr>");
+                    }
+                }
+            })
+        })
+
+    </script>
+
 </head>
 <body>
 
@@ -65,33 +98,10 @@
                 <th>应用名称</th>
                 <th>应用编号</th>
                 <th>邮件组</th>
-                <th>创建人</th>
-                <th>创建时间</th>
                 <th>操作</th>
             </tr>
         </thead>
        <tbody>
-           <tr>
-               <td>应用名称</td>
-               <td>应用编号</td>
-               <td>邮件组</td>
-               <td>创建人</td>
-               <td>创建时间</td>
-               <td>
-                   <a href="/application/center/render/preview/12" role="button">详情</a>
-                   <a href="/application/center/render/modify/12" role="button">修改</a>
-               </td>
-           </tr>
-           <tr>
-               <td>应用名称</td>
-               <td>应用编号</td>
-               <td>邮件组</td>
-               <td>创建人</td>
-               <td>创建时间</td>
-               <td>
-                   <a href="#" role="button">详情</a>
-               </td>
-           </tr>
        </tbody>
     </table>
 
@@ -105,8 +115,6 @@
 <!-- /.container -->
 
 
-<script src="../../../js/jquery.min.js"></script>
-<script src="../../../js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -93,5 +93,11 @@ class ApplicationCenterController {
     "/iApplication/applicationList"
   }
 
+  @RequestMapping(value = Array("/application/list"), method = Array(RequestMethod.GET))
+  @ResponseBody
+  def applicationList() = {
+    val vos: List[ApplicationVo] = ApplicationVoGenerator.generateList()
+    new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", vos.toArray)
+  }
 
 }
