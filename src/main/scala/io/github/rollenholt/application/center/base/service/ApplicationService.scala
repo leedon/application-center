@@ -16,11 +16,14 @@ class ApplicationService {
   private[this] val applicationDao:ApplicationDao = null
 
   def createApplication(application:ApplicationVo):Int = {
-    0
+    require(application != null)
+    applicationDao.createApplication(application)
   }
 
   def modifyApplication(application: ApplicationVo):Int = {
-    0
+    require(application != null)
+    require(application.getCode != null)
+    applicationDao.modifyApplicationByCode(application);
   }
 
   def approveApply(application: ApplicationVo):Int = {

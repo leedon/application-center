@@ -9,6 +9,7 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-api" % "1.7.12",
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "javax.servlet" % "jstl" % "1.2",
-  "io.github.rollenholt" % "Pear" % "1.0.4"
+  "io.github.rollenholt" % "Pear" % "1.0.4",
+  "c3p0" % "c3p0" % "0.9.1.2"
 )
     
