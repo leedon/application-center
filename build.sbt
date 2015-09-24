@@ -10,6 +10,8 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "javax.servlet" % "jstl" % "1.2",
   "io.github.rollenholt" % "Pear" % "1.0.4",
-  "c3p0" % "c3p0" % "0.9.1.2"
+  "c3p0" % "c3p0" % "0.9.1.2",
+  "mysql" % "mysql-connector-java" % "5.1.34",
+  "com.typesafe.slick" %% "slick" % "3.0.3"
 )
     

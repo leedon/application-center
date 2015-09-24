@@ -12,7 +12,7 @@ create table application(
   email_group varchar(32) not null comment 'team email group',
   PRIMARY KEY (id),
   unique key idx_team_code(team_code),
-  unique key idx_code(code),
+  unique key idx_code(code)
 )engine=innodb default charset=utf8mb4 comment 'application table';
 
 create table application_developer_mapping(
