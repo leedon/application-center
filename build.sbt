@@ -6,9 +6,12 @@ scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
   "org.springframework.boot" % "spring-boot-starter-web" % "1.2.5.RELEASE",
+  "org.springframework.boot" % "spring-boot-starter-jdbc" % "1.2.5.RELEASE",
   "org.slf4j" % "slf4j-api" % "1.7.12",
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "javax.servlet" % "jstl" % "1.2",
-  "io.github.rollenholt" % "Pear" % "1.0.4"
+  "io.github.rollenholt" % "Pear" % "1.0.4",
+  "org.mybatis" % "mybatis" % "3.3.0",
+  "org.mybatis" % "mybatis-spring" % "1.2.3"
 )
     
