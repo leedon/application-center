@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 /**
  * @author rollenholt 
  */
-@PropertySource("classpath:jdbc.properties")
+@PropertySource(value = Array("classpath:jdbc.properties"))
 @Component
 @EnableTransactionManagement
 class DatabaseComponent {
@@ -26,7 +26,7 @@ class DatabaseComponent {
   @Value("${jdbcUrl}")
   private var jdbcUrl: String = _
 
-  @Value("${user}")
+  @Value("${username}")
   private var user: String = _
 
   @Value("${password}")

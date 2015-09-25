@@ -15,7 +15,7 @@ class MapperConfig {
 
   @Bean
   def getApplicationMapper() = {
-    databaseComponent.getMapper(classOf[ApplicationDao])
+    databaseComponent.getMapper(classOf[ApplicationMapper])
   }
 
 }
