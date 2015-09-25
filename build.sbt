@@ -12,6 +12,8 @@ libraryDependencies ++= Seq(
   "javax.servlet" % "jstl" % "1.2",
   "io.github.rollenholt" % "Pear" % "1.0.4",
   "org.mybatis" % "mybatis" % "3.3.0",
-  "org.mybatis" % "mybatis-spring" % "1.2.3"
+  "org.mybatis" % "mybatis-spring" % "1.2.3",
+  "c3p0" % "c3p0" % "0.9.1.2",
+  "mysql" % "mysql-connector-java" % "5.1.36"
 )
     
