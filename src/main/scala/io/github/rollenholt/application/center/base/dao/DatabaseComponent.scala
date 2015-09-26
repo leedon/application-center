@@ -7,7 +7,7 @@ import slick.driver.MySQLDriver.api._
 /**
  * @author rollenholt 
  */
-trait DataBaseComponent {
+trait DatabaseComponent {
 
   private[this] val url: String = "jdbc:mysql://localhost:3306/test"
   private[this] val driver: String = "com.mysql.jdbc.Driver"
