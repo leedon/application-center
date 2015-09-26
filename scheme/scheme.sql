@@ -10,8 +10,9 @@ create table application(
   create_time datetime not null comment 'create time',
   state tinyint(4) not null comment 'application apply state',
   email_group varchar(32) not null comment 'team email group',
-  is_join_iconfig tinyint(4) not null DEFAULT 0 comment 'is join iconfig',
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  unique key idx_team_code(team_code),
+  unique key idx_code(code)
 )engine=innodb default charset=utf8mb4 comment 'application table';
 
 create table application_developer_mapping(
@@ -23,6 +24,5 @@ create table application_developer_mapping(
 
 create table application_acl(
   id int(10) unsigned not null AUTO_INCREMENT,
-
 
 )engine=innodb default charset=utf8mb4 comment 'application acl table';
