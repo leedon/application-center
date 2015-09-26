@@ -49,7 +49,7 @@ class ApplicationCenterController {
 
   @RequestMapping(value = Array("/detail/{applicationCode}"), method = Array(RequestMethod.GET))
   @ResponseBody
-  def applicationDetail(@PathVariable("applicationCode") applicationCode:String):JsonV2[ApplicationVo] = {
+  def applicationDetail(@PathVariable("applicationCode") applicationCode: String): JsonV2[ApplicationVo] = {
     logger.info("接收到参数:{}", applicationCode)
     val vo: ApplicationVo = ApplicationVoGenerator.generate()
     new JsonV2[ApplicationVo](0, "查询应用信息成功", vo)
@@ -100,4 +100,8 @@ class ApplicationCenterController {
     new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", vos.toArray)
   }
 
+  @RequestMapping(value = Array("/test"), method = Array(RequestMethod.GET))
+  def test() = {
+    applicationService.test()
+  }
 }

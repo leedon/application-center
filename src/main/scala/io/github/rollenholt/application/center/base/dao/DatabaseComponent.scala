@@ -1,23 +1,44 @@
 package io.github.rollenholt.application.center.base.dao
 
-import com.mchange.v2.c3p0.ComboPooledDataSource
-import slick.driver.MySQLDriver.api._
+import javax.sql.DataSource
 
+import com.mchange.v2.c3p0.ComboPooledDataSource
+import org.apache.ibatis.session.SqlSessionFactory
+import org.mybatis.spring.SqlSessionFactoryBean
+import org.mybatis.spring.mapper.MapperFactoryBean
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.{Bean, PropertySource}
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver
+import org.springframework.jdbc.datasource.DataSourceTransactionManager
+import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.EnableTransactionManagement
 
 /**
  * @author rollenholt 
  */
-trait DatabaseComponent {
+@PropertySource(value = Array("classpath:jdbc.properties"))
+@Component
+@EnableTransactionManagement
+class DatabaseComponent {
 
-  private[this] val url: String = "jdbc:mysql://localhost:3306/test"
-  private[this] val driver: String = "com.mysql.jdbc.Driver"
-  private[this] val user: String = "root"
-  private[this] val password: String = ""
+  @Value("${driverClass}")
+  private var driverClass: String = _
 
-  val db = {
+  @Value("${jdbcUrl}")
+  private var jdbcUrl: String = _
+
+  @Value("${username}")
+  private var user: String = _
+
+  @Value("${password}")
+  private var password: String = _
+
+  @Bean
+  def getDataSource(): DataSource = {
     val ds = new ComboPooledDataSource()
-    ds.setDriverClass(driver)
-    ds.setJdbcUrl(url)
+    ds.setDriverClass(driverClass)
+    ds.setJdbcUrl(jdbcUrl)
     ds.setUser(user)
     ds.setPassword(password)
     ds.setInitialPoolSize(10)
@@ -25,13 +46,28 @@ trait DatabaseComponent {
     ds.setMaxIdleTime(600)
     ds.setMaxStatements(40)
     ds.setAutoCommitOnClose(true)
-    Database.forDataSource(ds)
+    ds
   }
 
-  implicit val JavaUtilDateMapper =
-    MappedColumnType.base[java.util.Date, java.sql.Timestamp](
-      d => new java.sql.Timestamp(d.getTime),
-      d => new java.util.Date(d.getTime)
-    )
+  @Bean
+  def getDataSourceTransactionManager(): DataSourceTransactionManager = {
+    new DataSourceTransactionManager(getDataSource())
+  }
+
+  @Bean
+  def getSqlSessionFactory(): SqlSessionFactory = {
+    val resolver: PathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver()
+    val sessionFactory: SqlSessionFactoryBean = new SqlSessionFactoryBean();
+    sessionFactory.setDataSource(getDataSource());
+    sessionFactory.setMapperLocations((resolver.getResources("classpath*:mapper/*.xml")))
+    sessionFactory.getObject
+  }
+
+  def getMapper[T](mapperInterface: Class[T]) = {
+    val factoryBean: MapperFactoryBean[T] = new MapperFactoryBean[T]()
+    factoryBean.setSqlSessionFactory(getSqlSessionFactory())
+    factoryBean.setMapperInterface(mapperInterface)
+    factoryBean
+  }
 
 }
