@@ -18,6 +18,3 @@ case class ApplicationVo() extends Serializable {
 
   override def toString = s"ApplicationVo($name, $code, $developers, $emailGroup)"
 }
-
-case class Application(id: Option[Int], name: String, code: String, teamCode: String,
-                       creator: String, createTime: Date, state: Int, emailGroup: String)
