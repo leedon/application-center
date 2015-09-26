@@ -7,7 +7,7 @@ import scala.beans.BeanProperty
 /**
  * @author rollenholt 
  */
-class Application() extends Serializable {
+case class Application() extends Serializable {
 
   @BeanProperty var id: Int = 0
   @BeanProperty var name: String = _
