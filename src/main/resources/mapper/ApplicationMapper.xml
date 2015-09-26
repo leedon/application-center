@@ -3,7 +3,7 @@
 
 <mapper namespace="io.github.rollenholt.application.center.base.dao.ApplicationMapper">
 
-    <select id="findById" parameterType="java.lang.Integer" resultType="io.github.rollenholt.application.center.base.model.Application">
+    <select id="findById" parameterType="scala.Int" resultType="io.github.rollenholt.application.center.base.model.Application">
         SELECT
         id,
         name,
@@ -13,6 +13,8 @@
         create_time as createTime,
         state,
         email_group as emailGroup
+        FROM
+        application
         where id = #{value}
     </select>
 

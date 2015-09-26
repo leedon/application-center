@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionFactoryBean
 import org.mybatis.spring.mapper.MapperFactoryBean
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.{Bean, PropertySource}
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.EnableTransactionManagement
@@ -54,8 +56,10 @@ class DatabaseComponent {
 
   @Bean
   def getSqlSessionFactory(): SqlSessionFactory = {
+    val resolver: PathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver()
     val sessionFactory: SqlSessionFactoryBean = new SqlSessionFactoryBean();
     sessionFactory.setDataSource(getDataSource());
+    sessionFactory.setMapperLocations((resolver.getResources("classpath*:mapper/*.xml")))
     sessionFactory.getObject
   }
 

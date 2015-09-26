@@ -7,9 +7,6 @@ import scala.beans.BeanProperty
 /**
  * @author rollenholt 
  */
-//case class Application(id: Option[Int], name: String, code: String, teamCode: String,
-//                       creator: String, createTime: Date, state: Int, emailGroup: String)
-
 class Application() extends Serializable {
 
   @BeanProperty var id: Int = 0
