@@ -3,7 +3,8 @@ package io.github.rollenholt.application.center.base.service
 import javax.annotation.Resource
 
 import io.github.rollenholt.application.center.base.dao.ApplicationMapper
-import io.github.rollenholt.application.center.base.model.{Application, ApplicationVo}
+import io.github.rollenholt.application.center.base.model.{ApplicationState, Application, ApplicationVo}
+import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Service
 
 /**
@@ -13,23 +14,34 @@ import org.springframework.stereotype.Service
 class ApplicationService {
 
   @Resource
-  private[this] val applicationDao:ApplicationMapper = null
+  private[this] val applicationDao: ApplicationMapper = null
 
-  def createApplication(application:ApplicationVo):Int = {
-    0
+  private[this] val logger:Logger = LoggerFactory.getLogger(classOf[ApplicationService])
+
+  def createApplication(vo: ApplicationVo): Int = {
+    val application: Application = Application.fromApplicationVo(vo)
+    applicationDao.createApplication(application)
   }
 
-  def modifyApplication(application: ApplicationVo):Int = {
-    0
+  def modifyApplication(vo: ApplicationVo): Int = {
+    val application: Application = Application.fromApplicationVo(vo)
+    applicationDao.modifyApplication(application)
   }
 
-  def approveApply(application: ApplicationVo):Int = {
-    0
+  def queryApplicationDetail(applicationCode: String): Application = {
+    return applicationDao.queryByApplicationCode(applicationCode)
   }
 
-  def test() = {
-    val application: Application = applicationDao.findById(1)
-    println(application)
+  def approveApply(vo: ApplicationVo): Int = {
+    val applicationCode: String = vo.getCode
+    applicationDao.approveApply(applicationCode, ApplicationState.Reviewed.id)
+  }
+
+  def list(): List[ApplicationVo] = {
+    val applicationList: Array[Application] = applicationDao.list()
+    applicationList.map((item: Application) => {
+      Application.toApplicationVo(item)
+    }).toList
   }
 
 }

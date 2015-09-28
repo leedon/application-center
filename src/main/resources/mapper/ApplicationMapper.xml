@@ -3,7 +3,7 @@
 
 <mapper namespace="io.github.rollenholt.application.center.base.dao.ApplicationMapper">
 
-    <select id="findById" parameterType="scala.Int" resultType="io.github.rollenholt.application.center.base.model.Application">
+    <select id="findById" parameterType="int" resultType="io.github.rollenholt.application.center.base.model.Application">
         SELECT
         id,
         name,
@@ -12,10 +12,87 @@
         creator,
         create_time as createTime,
         state,
-        email_group as emailGroup
+        email_group as emailGroup,
+        developers as developers
         FROM
         application
         where id = #{value}
     </select>
 
+    <select id="queryByApplicationCode" parameterType="String" resultType="io.github.rollenholt.application.center.base.model.Application">
+        SELECT
+        id,
+        name,
+        code,
+        team_code as teamCode,
+        creator,
+        create_time as createTime,
+        state,
+        email_group as emailGroup,
+        developers as developers
+        FROM
+        application
+        where code = #{applicationCode}
+    </select>
+
+    <select id="list" resultType="io.github.rollenholt.application.center.base.model.Application">
+        SELECT
+        id,
+        name,
+        code,
+        team_code as teamCode,
+        creator,
+        create_time as createTime,
+        state,
+        email_group as emailGroup,
+        developers as developers
+        FROM
+        application
+    </select>
+
+    <insert id="createApplication" parameterType="io.github.rollenholt.application.center.base.model.Application"
+            useGeneratedKeys="true" keyColumn="id" >
+        insert into application(
+        name,
+        code,
+        team_code,
+        creator,
+        create_time,
+        state,
+        email_group,
+        developers
+        ) values (
+        #{name},
+        #{code},
+        #{teamCode},
+        #{creator},
+        #{createTime},
+        #{state},
+        #{emailGroup},
+        #{developers}
+        )
+    </insert>
+
+    <update id="modifyApplication" parameterType="io.github.rollenholt.application.center.base.model.Application">
+        update application
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <if test="teamCode != null and teamCode != ''">
+                team_code = #{teamCode}
+            </if>
+            <if test="emailGroup != null and emailGroup != ''">
+                email_group = #{emailGroup}
+            </if>
+            <if test="developers != null and developers != ''">
+                developers = #{developers}
+            </if>
+        </set>
+        where code = #{code}
+    </update>
+
+    <update id="approveApply" parameterType="int">
+      update application set state = #{state} where code = #{applicationCode}
+    </update>
 </mapper>

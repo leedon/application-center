@@ -1,7 +1,8 @@
-package io.github.rollenholt.application.center.base.dao
+package io.github.rollenholt.application.center.config
 
 import javax.annotation.Resource
 
+import io.github.rollenholt.application.center.base.dao.ApplicationMapper
 import org.springframework.context.annotation.{Bean, Configuration}
 
 /**

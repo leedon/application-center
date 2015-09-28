@@ -7,5 +7,15 @@ import io.github.rollenholt.application.center.base.model.Application
  */
 trait ApplicationMapper {
 
+  def list():Array[Application]
+
+  def createApplication(application: Application): Int
+
+  def modifyApplication(application: Application): Int
+
+  def approveApply(applicationCode: String, state: Int): Int = ???
+
+  def queryByApplicationCode(applicationCode:String):Application = ???
+
   def findById(id: Int): Application
 }

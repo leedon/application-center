@@ -89,6 +89,10 @@
             <input type="email" class="form-control" maxlength="20" size="30px" name="emailGroup" id="emailGroup">
         </div>
         <div class="form-group">
+            <label for="teamCode">团队编号:</label>
+            <input type="text" class="form-control" maxlength="100" size="30px" name="teamCode" id="teamCode">
+        </div>
+        <div class="form-group">
             <label for="applicationHead">应用负责人:</label>
             <span class="label label-info">负责人之间使用/分割</span>
             <input type="text" class="form-control"  size="30px" name="developers" id="applicationHead">
