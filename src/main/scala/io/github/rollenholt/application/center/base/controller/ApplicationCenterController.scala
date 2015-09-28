@@ -108,8 +108,4 @@ class ApplicationCenterController {
     new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", applicationVoes.toArray)
   }
 
-  @RequestMapping(value = Array("/test"), method = Array(RequestMethod.GET))
-  def test() = {
-    applicationService.test()
-  }
 }

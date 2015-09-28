@@ -44,10 +44,4 @@ class ApplicationService {
     }).toList
   }
 
-  def test() = {
-    val application: Application = applicationDao.findById(1)
-    logger.info(application.toString)
-    logger.info(application.getCode)
-  }
-
 }
