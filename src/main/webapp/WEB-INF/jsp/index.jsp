@@ -55,7 +55,7 @@
             <p class="lead">不信你试试</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="/img/1.pic.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
     </div>
 
@@ -67,7 +67,7 @@
             <p class="lead">完全从实际应用场景出发.</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="/img/2.pic.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
     </div>
 
@@ -79,7 +79,7 @@
             <p class="lead">7x24小时</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="/img/2.pic.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
     </div>
 
