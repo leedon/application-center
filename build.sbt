@@ -1,6 +1,6 @@
 name := "application-center"
 
-version := "1.1.x-SNAPSHOT"
+version := "1.1.1modify ver"
 
 scalaVersion := "2.11.7"
 
