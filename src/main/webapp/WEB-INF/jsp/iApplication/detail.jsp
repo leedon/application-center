@@ -14,39 +14,13 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
-
     <script>
 
-        $(document).ready(function () {
-            $.ajax({
-                type: 'get',
-                cache: false,
-                dataType: 'json',
-                url: '/application/center/application/list',
-                success: function (data) {
-                    var applicationVos = data.data;
-                    for(var i = 0; i< applicationVos.length; i++){
-                        var data = applicationVos[i]
-                        $("table tbody").append(
-                                "<tr>" +
-                                    "<td>" + data.name +  "</td><td>" + data.code + "</td>" +
-                                    "<td>" + data.emailGroup + "</td>" +
-                                    "<td>" +
-                                        "<a href=\"/application/center/render/detail/" + data.code +"\" role=\"button\">详情</a> " +
-                                        "<a href=\"/application/center/render/preview/" + data.code +"\" role=\"button\">预览</a> " +
-                                        "<a href=\"/application/center/render/modify/"+ data.code + "\" role=\"button\">修改</a>" +
-                                    "</td>" +
-                                "</tr>");
-                    }
-                }
-            })
-        })
+
 
     </script>
-
 </head>
 <body>
-
 
 <div class="navbar-wrapper">
     <div class="container">
@@ -82,29 +56,30 @@
 
 <div class="container marketing">
     <hr class="featurette-divider">
-    <h3>应用列表</h3>
-    <di>
-        <form class="form-inline">
-            <div class="input-append">
-                <input class="span2" id="appendedInputButtons" type="text">
-                <button class="btn btn-primary" type="submit">搜索</button>
-                <a class="btn btn-primary" type="button" href="/application/center/render/create">创建应用</a>
-            </div>
-        </form>
-    </di>
+    <h3>应用详情</h3>
 
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>应用名称</th>
-                <th>应用编号</th>
-                <th>邮件组</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-       <tbody>
-       </tbody>
-    </table>
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#ServerListTab" data-toggle="tab">服务器列表</a></li>
+            <li><a href="#UrlAclTab" data-toggle="tab">URL访问控制</a></li>
+            <li><a href="#LogCollectTab" data-toggle="tab">日志收集列表</a></li>
+            <li><a href="#OperateLogTab" data-toggle="tab">操作记录</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="ServerListTab">
+                <p>Howdy, I'm in Section 2.</p>
+            </div>
+            <div class="tab-pane" id="UrlAclTab">
+                <p>Howdy, I'm in Section 2.</p>
+            </div>
+            <div class="tab-pane" id="LogCollectTab">
+                <p>Howdy, I'm in Section 2.</p>
+            </div>
+            <div class="tab-pane" id="OperateLogTab">
+                <p>Howdy, I'm in Section 2.</p>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -114,7 +89,6 @@
 
 </div>
 <!-- /.container -->
-
 
 
 </body>

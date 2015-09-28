@@ -108,4 +108,8 @@ class ApplicationCenterController {
     new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", applicationVoes.toArray)
   }
 
+  @RequestMapping(value = Array("/render/detail/{applicationCode}"), method = Array(RequestMethod.GET))
+  def renderDetailPage(): String ={
+    "iApplication/detail"
+  }
 }

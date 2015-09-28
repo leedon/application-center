@@ -79,7 +79,7 @@
             <p class="lead">7x24小时</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" src="/img/2.pic.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="/img/3.pic.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
     </div>
 
