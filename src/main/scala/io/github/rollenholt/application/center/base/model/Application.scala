@@ -19,6 +19,8 @@ case class Application() extends Serializable {
   @BeanProperty var emailGroup: String = _
   @BeanProperty var developers: String = _
 
+
+  override def toString = s"Application($id, $name, $code, $teamCode, $creator, $createTime, $state, $emailGroup, $developers)"
 }
 
 object Application {

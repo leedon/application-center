@@ -13,7 +13,7 @@ trait ApplicationMapper {
 
   def modifyApplication(application: Application): Int
 
-  def approveApply(applicationCode: String, id: Int): Int = ???
+  def approveApply(applicationCode: String, state: Int): Int = ???
 
   def findById(id: Int): Application
 }

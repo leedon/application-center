@@ -4,6 +4,7 @@ import javax.annotation.Resource
 
 import io.github.rollenholt.application.center.base.dao.ApplicationMapper
 import io.github.rollenholt.application.center.base.model.{ApplicationState, Application, ApplicationVo}
+import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Service
 
 /**
@@ -14,6 +15,8 @@ class ApplicationService {
 
   @Resource
   private[this] val applicationDao: ApplicationMapper = null
+
+  private[this] val logger:Logger = LoggerFactory.getLogger(classOf[ApplicationService])
 
   def createApplication(vo: ApplicationVo): Int = {
     val application: Application = Application.fromApplicationVo(vo)
@@ -39,7 +42,8 @@ class ApplicationService {
 
   def test() = {
     val application: Application = applicationDao.findById(1)
-    println(application)
+    logger.info(application.toString)
+    logger.info(application.getCode)
   }
 
 }
