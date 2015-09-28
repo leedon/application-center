@@ -31,9 +31,10 @@ object Application {
     application.code = vo.code
     application.teamCode = vo.teamCode
     application.creator = vo.creator
-    application.createTime = new Date()
+    application.createTime = vo.createTime
     application.state = ApplicationState.Unreviewed.id
     application.emailGroup = vo.emailGroup
+    application.developers = vo.developers
     application
   }
 

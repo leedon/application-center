@@ -28,16 +28,20 @@ class ApplicationService {
     applicationDao.modifyApplication(application)
   }
 
+  def queryApplicationDetail(applicationCode: String): Application = {
+    return applicationDao.queryByApplicationCode(applicationCode)
+  }
+
   def approveApply(vo: ApplicationVo): Int = {
     val applicationCode: String = vo.getCode
     applicationDao.approveApply(applicationCode, ApplicationState.Reviewed.id)
   }
 
   def list(): List[ApplicationVo] = {
-    val applicationList: List[Application] = applicationDao.list()
+    val applicationList: Array[Application] = applicationDao.list()
     applicationList.map((item: Application) => {
       Application.toApplicationVo(item)
-    })
+    }).toList
   }
 
   def test() = {

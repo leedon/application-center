@@ -1,9 +1,10 @@
 package io.github.rollenholt.application.center.base.controller
 
+import java.util.Date
 import javax.annotation.Resource
 
 import com.rollenholt.pear.pojo.JsonV2
-import io.github.rollenholt.application.center.base.model.{ApplicationVo}
+import io.github.rollenholt.application.center.base.model.{Application, ApplicationState, ApplicationVo}
 import io.github.rollenholt.application.center.base.service.ApplicationService
 import io.github.rollenholt.application.center.forTest.ApplicationVoGenerator
 import org.slf4j.{Logger, LoggerFactory}
@@ -43,6 +44,12 @@ class ApplicationCenterController {
       })
       new JsonV2(-1, "argument error", errors)
     }
+
+    //init some property
+    application.creator = "system"
+    application.createTime = new Date
+    application.state = ApplicationState.Unreviewed.id
+
     applicationService.createApplication(application)
     new JsonV2(0, "ok", application.code)
   }
@@ -51,8 +58,9 @@ class ApplicationCenterController {
   @ResponseBody
   def applicationDetail(@PathVariable("applicationCode") applicationCode: String): JsonV2[ApplicationVo] = {
     logger.info("接收到参数:{}", applicationCode)
-    val vo: ApplicationVo = ApplicationVoGenerator.generate()
-    new JsonV2[ApplicationVo](0, "查询应用信息成功", vo)
+    val application:Application = applicationService.queryApplicationDetail(applicationCode)
+    val applicationVo: ApplicationVo = Application.toApplicationVo(application)
+    new JsonV2[ApplicationVo](0, "查询应用信息成功", applicationVo)
   }
 
   @RequestMapping(value = Array("/render/modify/{application}"), method = Array(RequestMethod.GET))
@@ -96,8 +104,8 @@ class ApplicationCenterController {
   @RequestMapping(value = Array("/application/list"), method = Array(RequestMethod.GET))
   @ResponseBody
   def applicationList() = {
-    val vos: List[ApplicationVo] = ApplicationVoGenerator.generateList()
-    new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", vos.toArray)
+    val applicationVoes: List[ApplicationVo] = applicationService.list()
+    new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", applicationVoes.toArray)
   }
 
   @RequestMapping(value = Array("/test"), method = Array(RequestMethod.GET))
