@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class OperationLogService {
 
   @Resource
-  private[this] val operationLogMapper: OperationLogMapper = _
+  private[this] val operationLogMapper: OperationLogMapper = null
 
   def queryByApplicationCode(applicationCode: String): Array[OperationLog] =
     operationLogMapper.queryByApplicationCode(applicationCode)

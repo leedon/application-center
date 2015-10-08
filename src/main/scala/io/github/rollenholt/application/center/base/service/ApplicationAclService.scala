@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class ApplicationAclService {
 
   @Resource
-  private[this] val applicationAclMapper: ApplicationAclMapper = _
+  private[this] val applicationAclMapper: ApplicationAclMapper = null
 
   def queryByApplicationCode(applicationCode: String): Array[ApplicationAcl] = {
     applicationAclMapper.queryByApplicationCode(applicationCode)

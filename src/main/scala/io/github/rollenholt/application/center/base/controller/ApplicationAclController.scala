@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.{ResponseBody, RequestMethod, Req
 class ApplicationAclController {
 
   @Resource
-  private[this] val applicationAclService: ApplicationAclService = _
+  private[this] val applicationAclService: ApplicationAclService = null
 
   @RequestMapping(value = Array("/query/{applicationCode}"), method = Array(RequestMethod.GET))
   @ResponseBody

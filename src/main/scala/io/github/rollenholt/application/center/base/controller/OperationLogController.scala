@@ -19,7 +19,7 @@ class OperationLogController {
   private[this] val logger: Logger = LoggerFactory.getLogger(classOf[OperationLogController])
 
   @Resource
-  private[this] val operationLogService: OperationLogService = _
+  private[this] val operationLogService: OperationLogService = null
 
   @RequestMapping(value = Array("/query/{applicationCode}"), method = Array(RequestMethod.GET))
   @ResponseBody

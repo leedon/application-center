@@ -2,7 +2,8 @@ package io.github.rollenholt.application.center.base.model
 
 import java.util.Date
 
-import com.fasterxml.jackson.databind.BeanProperty
+import scala.beans.BeanProperty
+
 
 /**
  * @author rollenholt 
