@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 class ApplicationService {
 
   @Resource
-  private[this] val applicationDao: ApplicationMapper = null
+  private[this] val applicationDao: ApplicationMapper = _
 
   private[this] val logger:Logger = LoggerFactory.getLogger(classOf[ApplicationService])
 
