@@ -32,7 +32,8 @@
                                     "<td>" + data.name +  "</td><td>" + data.code + "</td>" +
                                     "<td>" + data.emailGroup + "</td>" +
                                     "<td>" +
-                                        "<a href=\"/application/center/render/preview/" + data.code +"\" role=\"button\">详情</a> " +
+                                        "<a href=\"/application/center/render/detail/" + data.code +"\" role=\"button\">详情</a> " +
+                                        "<a href=\"/application/center/render/preview/" + data.code +"\" role=\"button\">预览</a> " +
                                         "<a href=\"/application/center/render/modify/"+ data.code + "\" role=\"button\">修改</a>" +
                                     "</td>" +
                                 "</tr>");

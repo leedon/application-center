@@ -7,6 +7,7 @@ import scala.beans.BeanProperty
 /**
  * @author rollenholt 
  */
+@SerialVersionUID(1L)
 case class Application() extends Serializable {
 
   @BeanProperty var id: Int = 0
