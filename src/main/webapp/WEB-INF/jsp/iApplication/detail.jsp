@@ -67,16 +67,67 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="ServerListTab">
-                <p>Howdy, I'm in Section 2.</p>
+                <br/>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>环境</th>
+                        <th>服务器名称</th>
+                        <th>IP</th>
+                        <th>应用端口</th>
+                        <th>是否在线</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
             <div class="tab-pane" id="UrlAclTab">
-                <p>Howdy, I'm in Section 2.</p>
+                <br/>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>状态</th>
+                        <th>授权应用</th>
+                        <th>授权IP</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
             <div class="tab-pane" id="LogCollectTab">
-                <p>Howdy, I'm in Section 2.</p>
+                <br/>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>日志文件名称</th>
+                        <th>模式</th>
+                        <th>目录</th>
+                        <th>收集状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
             <div class="tab-pane" id="OperateLogTab">
-                <p>Howdy, I'm in Section 2.</p>
+                <br/>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>操作人</th>
+                        <th>操作时间</th>
+                        <th>操作详情</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
