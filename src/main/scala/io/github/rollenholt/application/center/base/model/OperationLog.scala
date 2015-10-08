@@ -11,9 +11,12 @@ import com.fasterxml.jackson.databind.BeanProperty
 class OperationLog() extends Serializable {
 
   @BeanProperty var id: Int = 0
+  @BeanProperty var applicationCode: String = _
   @BeanProperty var operator: String = _
   @BeanProperty var operateTime: Date = _
   @BeanProperty var detail: String = _
 
-  override def toString = s"OperationLog(id=$id, operator=$operator, operateTime=$operateTime, detail=$detail)"
+
+  override def toString = s"OperationLog(id=$id, applicationCode=$applicationCode," +
+    s" operator=$operator, operateTime=$operateTime, detail=$detail)"
 }

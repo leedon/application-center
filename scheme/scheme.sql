@@ -18,17 +18,18 @@ create table application(
 
 create table application_acl(
   id int(10) unsigned not null AUTO_INCREMENT,
-  application_code varchar(64) not null comment '',
-  state tinyint(4) not null comment '',
-  url varchar(255) not null comment '',
-  authorized_application varchar(255) not null comment '',
-  authorized_ip varchar(255) not null comment '',
+  application_code varchar(64) not null comment '应用编号',
+  state tinyint(4) not null comment '数据状态',
+  url varchar(255) not null comment 'url',
+  authorized_application varchar(255) not null comment '授权的应用编号,-分割',
+  authorized_ip varchar(255) not null comment '授权的ip,-分割',
   PRIMARY KEY (id),
   key idx_application_code(application_code)
 )engine=innodb default charset=utf8mb4 comment 'application acl table';
 
 create table operation_log(
   id int(10) UNSIGNED not null AUTO_INCREMENT,
+  application_code varchar(64) not null comment '应用编号',
   operator varchar(32) not null comment '操作人',
   operate_time datetime not null comment '操作时间',
   detail text not null comment '操作详情',

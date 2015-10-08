@@ -6,7 +6,6 @@ import javax.annotation.Resource
 import com.rollenholt.pear.pojo.JsonV2
 import io.github.rollenholt.application.center.base.model.{Application, ApplicationState, ApplicationVo}
 import io.github.rollenholt.application.center.base.service.ApplicationService
-import io.github.rollenholt.application.center.forTest.ApplicationVoGenerator
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Controller
 import org.springframework.validation.annotation.Validated

@@ -16,8 +16,16 @@ class ApplicationAclService {
   private[this] val applicationAclMapper: ApplicationAclMapper = _
 
   def queryByApplicationCode(applicationCode: String): Array[ApplicationAcl] = {
-    null
+    applicationAclMapper.queryByApplicationCode(applicationCode)
   }
 
+  def createApplicationAcl(applicationAcl: ApplicationAcl): Int = {
+    require(applicationAcl != null)
+    applicationAclMapper.createApplicationAcl(applicationAcl)
+  }
 
+  def modifyApplicationAcl(applicationAcl: ApplicationAcl): Int = {
+    require(applicationAcl != null)
+    applicationAclMapper.modifyApplicationAcl(applicationAcl)
+  }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.rollenholt.application.center.base.dao.ApplicationAclMapper">
+
+    <select id="queryByApplicationCode" parameterType="String"
+            resultType="io.github.rollenholt.application.center.base.model.ApplicationAcl">
+        select
+        id,
+        application_code as applicationCode,
+        state,
+        url,
+        authorized_application as authorizedApplication,
+        authorized_ip as authorizedIp
+        from application_acl
+        where application_code = #{value}
+    </select>
+
+    <insert id="createApplicationAcl" parameterType="io.github.rollenholt.application.center.base.model.ApplicationAcl">
+        insert into application_acl(
+        application_code,
+        state,
+        url,
+        authorized_application,
+        authorized_ip
+        ) values (
+        #{applicationCode},
+        #{state},
+        #{url},
+        #{authorizedApplication},
+        #{authorizedIp}
+        )
+    </insert>
+
+    <update id="modifyApplicationAcl" parameterType="io.github.rollenholt.application.center.base.model.ApplicationAcl">
+        update application_acl
+        <set>
+            <if test="state != null and state != 0">
+                state = #{state}
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url}
+            </if>
+            <if test="authorizedApplication != null and authorizedApplication != ''">
+                authorized_application = #{authorizedApplication}
+            </if>
+            <if test="authorizedIp != null and authorizedIp != ''">
+                authorized_ip = #{authorizedIp}
+            </if>
+        </set>
+        where application_code = #{applicationCode}
+    </update>
+
+</mapper>
