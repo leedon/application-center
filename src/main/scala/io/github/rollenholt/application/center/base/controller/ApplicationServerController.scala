@@ -5,7 +5,7 @@ import javax.annotation.Resource
 import com.rollenholt.pear.pojo.JsonV2
 import io.github.rollenholt.application.center.base.model.ApplicationServerInfo
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.{RequestMethod, ResponseBody, RequestMapping}
+import org.springframework.web.bind.annotation.{PathVariable, RequestMethod, ResponseBody, RequestMapping}
 
 /**
  * @author rollenholt 
@@ -17,9 +17,9 @@ class ApplicationServerController {
   @Resource
   private[this] val applicationServerService: ApplicationServerService = null
 
-  @RequestMapping(value = Array("/query"), method = Array(RequestMethod.GET))
+  @RequestMapping(value = Array("/query/{applicationCode}"), method = Array(RequestMethod.GET))
   @ResponseBody
-  def queryApplicationServerInfo(applicationCode: String): JsonV2[Array[ApplicationServerInfo]] = {
+  def queryApplicationServerInfo(@PathVariable("applicationCode") applicationCode: String): JsonV2[Array[ApplicationServerInfo]] = {
     val serverInfos: List[ApplicationServerInfo] = applicationServerService.queryApplicationServerInfo(applicationCode)
     new JsonV2[Array[ApplicationServerInfo]](0, "ok", serverInfos.toArray)
   }
