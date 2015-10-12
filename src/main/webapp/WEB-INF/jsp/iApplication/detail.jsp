@@ -15,9 +15,31 @@
     <script src="/js/bootstrap.min.js"></script>
 
     <script>
-
-
-
+        $(document).ready(function () {
+            $.ajax({
+                type:'get',
+                cache: false,
+                dataType: 'json',
+                url: '/application/center/server/query',
+                success : function (data) {
+                    var serverInfo = data.data
+                    for(var i = 0; i< serverInfo.length; i++) {
+                        var data = serverInfo[i]
+                        $("#serverTbody").append(
+                                "<tr>" +
+                                        "<td>" + data.environmentType + "</td>" +
+                                        "<td>" + data.serverName + "</td>" +
+                                        "<td>" + data.serverIp + "</td>" +
+                                        "<td>" + data.serverPort +"</td>" +
+                                        "<td>####</td>" +
+                                "</tr>")
+                    }
+                },
+                error : function (data) {
+                    alert("查询服务器信息出错")
+                }
+            })
+        })
     </script>
 </head>
 <body>
@@ -68,18 +90,17 @@
         <div class="tab-content">
             <div class="tab-pane active" id="ServerListTab">
                 <br/>
-                <table class="table table-hover table-bordered">
+                <table class = "table table-hover table-bordered">
                     <thead>
                     <tr>
                         <th>环境</th>
                         <th>服务器名称</th>
                         <th>IP</th>
                         <th>应用端口</th>
-                        <th>是否在线</th>
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="serverTbody">
                     </tbody>
                 </table>
             </div>
