@@ -1,3 +1,5 @@
+organization := "ren.wenchao"
+
 name := "application-center"
 
 version := "1.1.2-SNAPSHOT"

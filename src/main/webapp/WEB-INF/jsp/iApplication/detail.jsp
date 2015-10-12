@@ -15,9 +15,63 @@
     <script src="/js/bootstrap.min.js"></script>
 
     <script>
+        $(document).ready(function () {
+            var applicationCode = window.location.pathname.split("/").reverse()[0]
+            $("#ServerListTabA").bind("click", serverInfo(applicationCode))
+            $("#UrlAclTabA").bind("click", urlList(applicationCode))
+        })
 
+        function serverInfo(applicationCode) {
+            $.ajax({
+                type:'get',
+                cache: false,
+                dataType: 'json',
+                url: '/application/center/server/query/' + applicationCode,
+                success : function (data) {
+                    var serverInfo = data.data
+                    for(var i = 0; i< serverInfo.length; i++) {
+                        var data = serverInfo[i]
+                        $("#serverTbody").append(
+                                "<tr>" +
+                                "<td>" + data.environmentType + "</td>" +
+                                "<td>" + data.serverName + "</td>" +
+                                "<td>" + data.serverIp + "</td>" +
+                                "<td>" + data.serverPort +"</td>" +
+                                "<td>####</td>" +
+                                "</tr>")
+                    }
+                },
+                error : function (data) {
+                    alert("查询服务器信息出错")
+                }
+            })
+        }
 
-
+        function urlList(applicationCode){
+            $.ajax({
+                type:'get',
+                cache: false,
+                dataType: 'json',
+                url: '/application/center/acl/query/' + applicationCode,
+                success : function (data) {
+                    var serverInfo = data.data
+                    for(var i = 0; i< serverInfo.length; i++) {
+                        var data = serverInfo[i]
+                        $("#urlTbody").append(
+                                "<tr>" +
+                                "<td>" + data.url + "</td>" +
+                                "<td>" + data.state + "</td>" +
+                                "<td>" + data.authorizedApplication + "</td>" +
+                                "<td>" + data.authorizedIp +"</td>" +
+                                "<td>####</td>" +
+                                "</tr>")
+                    }
+                },
+                error : function (data) {
+                    alert("查询应用的acl信息出错")
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -60,31 +114,31 @@
 
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#ServerListTab" data-toggle="tab">服务器列表</a></li>
-            <li><a href="#UrlAclTab" data-toggle="tab">URL访问控制</a></li>
+            <li id="ServerListTabA" class="active"><a href="#ServerListTab" data-toggle="tab">服务器列表</a></li>
+            <li><a id="UrlAclTabA" href="#UrlAclTab" data-toggle="tab">URL访问控制</a></li>
             <li><a href="#LogCollectTab" data-toggle="tab">日志收集列表</a></li>
             <li><a href="#OperateLogTab" data-toggle="tab">操作记录</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="ServerListTab">
                 <br/>
-                <table class="table table-hover table-bordered">
+                <table class = "table table-hover table-bordered">
                     <thead>
                     <tr>
                         <th>环境</th>
                         <th>服务器名称</th>
                         <th>IP</th>
                         <th>应用端口</th>
-                        <th>是否在线</th>
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="serverTbody">
                     </tbody>
                 </table>
             </div>
             <div class="tab-pane" id="UrlAclTab">
                 <br/>
+                <a href="#"><p class="text-info">新增URL访问控制</p></a>
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
@@ -95,7 +149,7 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="urlTbody">
                     </tbody>
                 </table>
             </div>

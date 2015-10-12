@@ -14,9 +14,7 @@ class ApplicationServerInfo extends Serializable {
   @BeanProperty var serverName: String = _
   @BeanProperty var serverIp: String = _
   @BeanProperty var serverPort: Int = _
-  @BeanProperty var isOnline: Boolean = _
-
 
   override def toString = s"ApplicationServerInfo(environmentType=$environmentType, " +
-    s"serverName=$serverName, serverIp=$serverIp, serverPort=$serverPort, isOnline=$isOnline)"
+    s"serverName=$serverName, serverIp=$serverIp, serverPort=$serverPort)"
 }

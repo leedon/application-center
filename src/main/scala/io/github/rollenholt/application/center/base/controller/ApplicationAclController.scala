@@ -6,7 +6,7 @@ import com.rollenholt.pear.pojo.JsonV2
 import io.github.rollenholt.application.center.base.model.ApplicationAcl
 import io.github.rollenholt.application.center.base.service.ApplicationAclService
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.{ResponseBody, RequestMethod, RequestMapping}
+import org.springframework.web.bind.annotation.{PathVariable, ResponseBody, RequestMethod, RequestMapping}
 
 /**
  * @author rollenholt 
@@ -20,7 +20,7 @@ class ApplicationAclController {
 
   @RequestMapping(value = Array("/query/{applicationCode}"), method = Array(RequestMethod.GET))
   @ResponseBody
-  def queryByApplicationCode(applicationCode: String): JsonV2[Array[ApplicationAcl]] = {
+  def queryByApplicationCode(@PathVariable("applicationCode")applicationCode: String): JsonV2[Array[ApplicationAcl]] = {
     val acls: Array[ApplicationAcl] = applicationAclService.queryByApplicationCode(applicationCode)
     new JsonV2[Array[ApplicationAcl]](0, "ok", acls)
   }
