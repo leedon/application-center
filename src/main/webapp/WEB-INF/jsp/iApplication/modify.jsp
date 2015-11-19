@@ -1,132 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../../favicon.ico">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../template/header.jsp" %>
 
-    <title>Application-Center</title>
+<script>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/carousel.css" rel="stylesheet">
-
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-
-    <script>
-
-        $(document).ready(function () {
-            var applicationCode = window.location.pathname.split("/").reverse()[0];
-            $.ajax({
-                type: 'get',
-                cache: false,
-                dataType: 'json',
-                url: '/application/center/detail/' + applicationCode,
-                success: function (data) {
-                    $("#applicationName").val(data.data.name)
-                    $("#applicationCode").val(data.data.code)
-                    $("#emailGroup").val(data.data.emailGroup)
-                    $("#teamCode").val(data.data.teamCode)
-                    $("#applicationHead").val(data.data.developers)
-                }
-            })
+    $(document).ready(function () {
+        var applicationCode = window.location.pathname.split("/").reverse()[0];
+        $.ajax({
+            type: 'get',
+            cache: false,
+            dataType: 'json',
+            url: '/application/center/detail/' + applicationCode,
+            success: function (data) {
+                $("#applicationName").val(data.data.name)
+                $("#applicationCode").val(data.data.code)
+                $("#emailGroup").val(data.data.emailGroup)
+                $("#teamCode").val(data.data.teamCode)
+                $("#applicationHead").val(data.data.developers)
+            }
         })
+    })
 
-        function modifyApplication() {
-            console.log($("#applicationModifyForm").serialize())
-            $.ajax({
-                type: 'post',
-                cache: false,
-                url: '/application/center/modify',
-                data: $("#applicationModifyForm").serialize(),
-                error: function (request) {
-                    alert("form submit error, please retry or contact system admin.")
-                },
-                success: function (data) {
-                    console.log(data);
-                    if (data.code == 0) {
-                        window.location.href = "/application/center/list";
-                    } else {
-                        alert(data.msg + "\n" + data.data);
-                    }
+    function modifyApplication() {
+        console.log($("#applicationModifyForm").serialize())
+        $.ajax({
+            type: 'post',
+            cache: false,
+            url: '/application/center/modify',
+            data: $("#applicationModifyForm").serialize(),
+            error: function (request) {
+                alert("form submit error, please retry or contact system admin.")
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.code == 0) {
+                    window.location.href = "/application/center/list";
+                } else {
+                    alert(data.msg + "\n" + data.data);
                 }
-            });
-        }
-    </script>
-</head>
-<body>
+            }
+        });
+    }
+</script>
 
-<div class="navbar-wrapper">
-    <div class="container">
+<hr class="featurette-divider">
+<h3>修改应用</h3>
 
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">Application-Center</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/application/center/list">iApplication</a></li>
-                        <li><a href="#">iConfig</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+<form role="form" style="position: relative; left:20%;" id="applicationModifyForm">
+    <div class="form-group">
+        <label for="applicationName">应用名称:</label>
+        <input type="text" class="form-control" maxlength="20" size="30px" name="name" id="applicationName">
     </div>
-</div>
+    <div class="form-group">
+        <label for="applicationCode">应用编号:</label>
+        <input type="text" class="form-control" maxlength="20" size="30px" name="code" id="applicationCode" readonly>
+    </div>
+    <div class="form-group">
+        <label for="emailGroup">邮件组:</label>
+        <input type="email" class="form-control" maxlength="20" size="30px" name="emailGroup" id="emailGroup">
+    </div>
+    <div class="form-group">
+        <label for="teamCode">团队编号:</label>
+        <input type="text" class="form-control" maxlength="100" size="30px" name="teamCode" id="teamCode">
+    </div>
+    <div class="form-group">
+        <label for="applicationHead">应用负责人:</label>
+        <span class="label label-info">负责人之间使用/分割</span>
+        <input type="text" class="form-control" size="30px" name="developers" id="applicationHead">
+    </div>
+    <button type="button" class="btn btn-default" onclick="modifyApplication()">Submit</button>
+</form>
 
-<div class="container marketing">
-    <hr class="featurette-divider">
-    <h3>修改应用</h3>
-
-    <form role="form" style="position: relative; left:20%;" id="applicationModifyForm">
-        <div class="form-group">
-            <label for="applicationName">应用名称:</label>
-            <input type="text" class="form-control" maxlength="20" size="30px" name="name" id="applicationName">
-        </div>
-        <div class="form-group">
-            <label for="applicationCode">应用编号:</label>
-            <input type="text" class="form-control" maxlength="20" size="30px" name="code" id="applicationCode" readonly>
-        </div>
-        <div class="form-group">
-            <label for="emailGroup">邮件组:</label>
-            <input type="email" class="form-control" maxlength="20" size="30px" name="emailGroup" id="emailGroup">
-        </div>
-        <div class="form-group">
-            <label for="teamCode">团队编号:</label>
-            <input type="text" class="form-control" maxlength="100" size="30px" name="teamCode" id="teamCode">
-        </div>
-        <div class="form-group">
-            <label for="applicationHead">应用负责人:</label>
-            <span class="label label-info">负责人之间使用/分割</span>
-            <input type="text" class="form-control" size="30px" name="developers" id="applicationHead">
-        </div>
-        <button type="button" class="btn btn-default" onclick="modifyApplication()">Submit</button>
-    </form>
-
-    <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-
-        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-    </footer>
-
-</div>
-<!-- /.container -->
-
-
-</body>
-</html>
+<%@ include file="../template/footer.jsp" %>

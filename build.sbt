@@ -9,6 +9,7 @@ scalaVersion := "2.11.7"
 libraryDependencies ++= Seq(
   "org.springframework.boot" % "spring-boot-starter-web" % "1.2.5.RELEASE",
   "org.springframework.boot" % "spring-boot-starter-jdbc" % "1.2.5.RELEASE",
+  "org.apache.tomcat.embed" % "tomcat-embed-jasper" % "8.0.28",
   "org.slf4j" % "slf4j-api" % "1.7.12",
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "javax.servlet" % "jstl" % "1.2",
