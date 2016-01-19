@@ -17,6 +17,9 @@ libraryDependencies ++= Seq(
   "org.mybatis" % "mybatis" % "3.3.0",
   "org.mybatis" % "mybatis-spring" % "1.2.3",
   "c3p0" % "c3p0" % "0.9.1.2",
-  "mysql" % "mysql-connector-java" % "5.1.36"
+  "mysql" % "mysql-connector-java" % "5.1.36",
+  "cglib" % "cglib-nodep" % "3.2.0",
+  "org.aspectj" % "aspectjweaver" % "1.8.7"
+
 )
     

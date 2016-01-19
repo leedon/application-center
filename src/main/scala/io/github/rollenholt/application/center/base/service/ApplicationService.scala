@@ -6,17 +6,18 @@ import io.github.rollenholt.application.center.base.dao.ApplicationMapper
 import io.github.rollenholt.application.center.base.model.{ApplicationState, Application, ApplicationVo}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Service
+import scala.collection.JavaConversions._
 
 /**
- * @author rollenholt 
- */
+  * @author rollenholt
+  */
 @Service
 class ApplicationService {
 
   @Resource
   private[this] val applicationDao: ApplicationMapper = null
 
-  private[this] val logger:Logger = LoggerFactory.getLogger(classOf[ApplicationService])
+  private[this] val logger: Logger = LoggerFactory.getLogger(classOf[ApplicationService])
 
   def createApplication(vo: ApplicationVo): Int = {
     val application: Application = Application.fromApplicationVo(vo)
@@ -29,7 +30,7 @@ class ApplicationService {
   }
 
   def queryApplicationDetail(applicationCode: String): Application = {
-    return applicationDao.queryByApplicationCode(applicationCode)
+    applicationDao.queryByApplicationCode(applicationCode)
   }
 
   def approveApply(vo: ApplicationVo): Int = {
