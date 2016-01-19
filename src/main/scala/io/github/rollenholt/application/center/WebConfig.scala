@@ -1,4 +1,4 @@
-package io.github.rollenholt.application.center.config
+package io.github.rollenholt.application.center
 
 import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.web.servlet.config.annotation.{DefaultServletHandlerConfigurer, EnableWebMvc, WebMvcConfigurerAdapter}

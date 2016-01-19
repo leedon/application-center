@@ -3,9 +3,9 @@ package io.github.rollenholt.application.center.base.dao
 import io.github.rollenholt.application.center.base.model.OperationLog
 
 /**
- * @author rollenholt 
- */
-trait OperationLogMapper {
+  * @author rollenholt
+  */
+trait OperationLogMapper  extends Mapper{
 
   def queryByApplicationCode(applicationCode: String): Array[OperationLog]
 
