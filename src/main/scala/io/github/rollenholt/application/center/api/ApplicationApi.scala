@@ -1,4 +1,4 @@
-package io.github.rollenholt.application.center.base.controller
+package io.github.rollenholt.application.center.api
 
 import java.util.Date
 import javax.annotation.Resource
@@ -19,19 +19,14 @@ import scala.collection.mutable
  * @author rollenholt 
  */
 @Controller
-@RequestMapping(value = Array("/application/center"))
-class ApplicationCenterController {
-
-  private[this] val logger: Logger = LoggerFactory.getLogger(classOf[ApplicationCenterController])
+@RequestMapping(value = Array("/api/application"))
+class ApplicationApi {
 
   @Resource
   private[this] val applicationService: ApplicationService = null
 
+  private[this] val logger: Logger = LoggerFactory.getLogger(classOf[ApplicationApi])
 
-  @RequestMapping(value = Array("/render/create"), method = Array(RequestMethod.GET))
-  def renderCreatePage() = {
-    "iApplication/create"
-  }
 
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
@@ -62,12 +57,6 @@ class ApplicationCenterController {
     new JsonV2[ApplicationVo](0, "查询应用信息成功", applicationVo)
   }
 
-  @RequestMapping(value = Array("/render/modify/{application}"), method = Array(RequestMethod.GET))
-  def renderModifyPage() = {
-    "iApplication/modify"
-  }
-
-
   @RequestMapping(value = Array("/modify"), method = Array(RequestMethod.POST))
   @ResponseBody
   def modifyApplication(@Validated application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
@@ -82,33 +71,12 @@ class ApplicationCenterController {
     new JsonV2(0, "ok", application.code)
   }
 
-  @RequestMapping(value = Array("/render/preview/{application}"), method = Array(RequestMethod.GET))
-  def renderPreviewPage() = {
-    "iApplication/preview"
-  }
-
-
-  @RequestMapping(value = Array("/approve/{applicationId}"), method = Array(RequestMethod.GET))
-  @ResponseBody
-  def approveApply(@PathVariable("applicationId") applicationId: Int): JsonV2[String] = {
-    new JsonV2(0, "ok", "asdas")
-
-  }
 
   @RequestMapping(value = Array("/list"), method = Array(RequestMethod.GET))
-  def approveApply(): String = {
-    "/iApplication/applicationList"
-  }
-
-  @RequestMapping(value = Array("/application/list"), method = Array(RequestMethod.GET))
   @ResponseBody
   def applicationList() = {
     val applicationVoes: List[ApplicationVo] = applicationService.list()
     new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", applicationVoes.toArray)
   }
 
-  @RequestMapping(value = Array("/render/detail/{applicationCode}"), method = Array(RequestMethod.GET))
-  def renderDetailPage(): String ={
-    "iApplication/detail"
-  }
 }
