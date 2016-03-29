@@ -15,7 +15,7 @@ create table application(
   create_time datetime not null comment '应用创建时间',
   state tinyint(4) not null comment '应用申请状态',
   PRIMARY KEY (id),
-  unique key idx_team_code(team_code),
+  key idx_team_code(team_id),
   unique key idx_code(code)
 )engine=innodb default charset=utf8mb4 comment '应用表';
 
