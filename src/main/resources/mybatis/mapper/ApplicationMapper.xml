@@ -8,12 +8,11 @@
         id,
         name,
         code,
-        team_code as teamCode,
+        team_id as teamId,
         creator,
         create_time as createTime,
         state,
-        email_group as emailGroup,
-        developers as developers
+        email_group as emailGroup
         FROM
         application
         where id = #{value}
@@ -24,30 +23,31 @@
         id,
         name,
         code,
-        team_code as teamCode,
+        team_id as teamId,
         creator,
         create_time as createTime,
         state,
-        email_group as emailGroup,
-        developers as developers
+        email_group as emailGroup
         FROM
         application
         where code = #{applicationCode}
     </select>
 
-    <select id="list" resultType="io.github.rollenholt.application.center.base.model.Application">
+    <select id="list" resultType="io.github.rollenholt.application.center.base.model.ApplicationVo">
         SELECT
-        id,
-        name,
-        code,
-        team_code as teamCode,
-        creator,
-        create_time as createTime,
-        state,
-        email_group as emailGroup,
-        developers as developers
+        a.id,
+        a.name,
+        a.code,
+        a.team_id as teamId,
+        t.name as teamName,
+        a.creator,
+        a.create_time as createTime,
+        a.state,
+        aa.name as stateName,
+        a.email_group as emailGroup
         FROM
-        application
+        application a join team_dict t on a.team_id = t.id
+        join application_apply_state_dict aa on aa.id = a.state
     </select>
 
     <insert id="createApplication" parameterType="io.github.rollenholt.application.center.base.model.Application"
@@ -55,21 +55,19 @@
         insert into application(
         name,
         code,
-        team_code,
+        team_id,
         creator,
         create_time,
         state,
-        email_group,
-        developers
+        email_group
         ) values (
         #{name},
         #{code},
-        #{teamCode},
+        #{teamId},
         #{creator},
         #{createTime},
         #{state},
-        #{emailGroup},
-        #{developers}
+        #{emailGroup}
         )
     </insert>
 
@@ -79,14 +77,11 @@
             <if test="name != null and name != ''">
                 name = #{name}
             </if>
-            <if test="teamCode != null and teamCode != ''">
-                team_code = #{teamCode}
+            <if test="teamId != 0">
+                team_id = #{teamId}
             </if>
             <if test="emailGroup != null and emailGroup != ''">
                 email_group = #{emailGroup}
-            </if>
-            <if test="developers != null and developers != ''">
-                developers = #{developers}
             </if>
         </set>
         where code = #{code}

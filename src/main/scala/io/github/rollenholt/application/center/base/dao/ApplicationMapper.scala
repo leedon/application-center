@@ -1,13 +1,13 @@
 package io.github.rollenholt.application.center.base.dao
 
-import io.github.rollenholt.application.center.base.model.Application
+import io.github.rollenholt.application.center.base.model.{Application, ApplicationVo}
 
 /**
   * @author rollenholt
   */
 trait ApplicationMapper  extends Mapper{
 
-  def list(): Array[Application]
+  def list(): Array[ApplicationVo]
 
   def createApplication(application: Application): Int
 

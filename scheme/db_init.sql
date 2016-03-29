@@ -36,8 +36,8 @@ create table application_apply_state_dict(
 )engine=innodb default charset=utf8mb4 comment '应用申请状态字典表';
 
 insert into application_apply_state_dict(id, code, name) values (1, 'waiting_approval', '待审批');
-insert into application_apply_state_dict(id, code, name) values (1, 'approval_pass', '审批通过');
-insert into application_apply_state_dict(id, code, name) values (1, 'approval_reject', '审批拒绝');
+insert into application_apply_state_dict(id, code, name) values (2, 'approval_pass', '审批通过');
+insert into application_apply_state_dict(id, code, name) values (3, 'approval_reject', '审批拒绝');
 
 
 drop table if exists application_developer;

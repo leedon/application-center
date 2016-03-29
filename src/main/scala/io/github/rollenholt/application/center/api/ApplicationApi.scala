@@ -41,7 +41,7 @@ class ApplicationApi {
 
     //init some property
     application.creator = "system"
-    application.createTime = new Date
+    application.createTime = new Date()
     application.state = ApplicationState.Unreviewed.id
 
     applicationService.createApplication(application)
@@ -75,8 +75,8 @@ class ApplicationApi {
   @RequestMapping(value = Array("/list"), method = Array(RequestMethod.GET))
   @ResponseBody
   def applicationList() = {
-    val applicationVoes: List[ApplicationVo] = applicationService.list()
-    new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", applicationVoes.toArray)
+    val applicationVoes: Array[ApplicationVo] = applicationService.list()
+    new JsonV2[Array[ApplicationVo]](0, "获取应用列表成功", applicationVoes)
   }
 
 }

@@ -38,11 +38,8 @@ class ApplicationService {
     applicationDao.approveApply(applicationCode, ApplicationState.Reviewed.id)
   }
 
-  def list(): List[ApplicationVo] = {
-    val applicationList: Array[Application] = applicationDao.list()
-    applicationList.map((item: Application) => {
-      Application.toApplicationVo(item)
-    }).toList
+  def list(): Array[ApplicationVo] = {
+    applicationDao.list()
   }
 
 }
