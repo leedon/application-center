@@ -9,7 +9,7 @@ create table application(
   id int(10) unsigned not null AUTO_INCREMENT comment '没有任何业务含义的主键',
   name varchar(32) not null comment '应用名称',
   code varchar(64) not null comment '应用编号',
-  team_code varchar(64) not null comment '部门编号',
+  team_id tinyint(4) not null comment '部门编号',
   email_group varchar(32) not null comment '部门邮件组',
   creator varchar(32) not null comment '应用创建人',
   create_time datetime not null comment '应用创建时间',
