@@ -11,7 +11,6 @@ import scala.beans.BeanProperty
 case class ApplicationVo() extends Serializable {
   @BeanProperty var id: Int = 0
   @BeanProperty var name: String = _
-  @BeanProperty var code: String = _
   @BeanProperty var creator: String = _
   @BeanProperty var teamId: String = _
   @BeanProperty var teamName: String = _
@@ -19,4 +18,5 @@ case class ApplicationVo() extends Serializable {
   @BeanProperty var emailGroup: String = _
   @BeanProperty var state: Int = 0
   @BeanProperty var stateName: String = _
+  @BeanProperty var developers: String = _
 }

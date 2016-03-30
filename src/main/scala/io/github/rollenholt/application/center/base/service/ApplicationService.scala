@@ -2,11 +2,12 @@ package io.github.rollenholt.application.center.base.service
 
 import javax.annotation.Resource
 
+import com.google.common.base.Strings
 import io.github.rollenholt.application.center.base.dao.ApplicationMapper
-import io.github.rollenholt.application.center.base.model.{ApplicationState, Application, ApplicationVo}
+import io.github.rollenholt.application.center.base.model.{Application, ApplicationVo}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Service
-import scala.collection.JavaConversions._
+import org.springframework.transaction.annotation.Transactional
 
 /**
   * @author rollenholt
@@ -19,23 +20,31 @@ class ApplicationService {
 
   private[this] val logger: Logger = LoggerFactory.getLogger(classOf[ApplicationService])
 
+  @Transactional
   def createApplication(vo: ApplicationVo): Int = {
     val application: Application = Application.fromApplicationVo(vo)
     applicationDao.createApplication(application)
+    if (!Strings.isNullOrEmpty(vo.developers)) {
+      val developers: Array[String] = vo.developers.split(",")
+      applicationDao.saveApplicationDeveloper(application, developers)
+    }
+    application.id
   }
 
+  @Transactional
   def modifyApplication(vo: ApplicationVo): Int = {
     val application: Application = Application.fromApplicationVo(vo)
     applicationDao.modifyApplication(application)
+    applicationDao.deleteApplicationDeveloper(vo.getId)
+    if (!Strings.isNullOrEmpty(vo.developers)) {
+      val developers: Array[String] = vo.developers.split(",")
+      applicationDao.saveApplicationDeveloper(application, developers)
+    }
+    vo.id
   }
 
-  def queryApplicationDetail(applicationCode: String): Application = {
+  def queryApplicationDetail(applicationCode: Int): Application = {
     applicationDao.queryByApplicationCode(applicationCode)
-  }
-
-  def approveApply(vo: ApplicationVo): Int = {
-    val applicationCode: String = vo.getCode
-    applicationDao.approveApply(applicationCode, ApplicationState.Reviewed.id)
   }
 
   def list(): Array[ApplicationVo] = {

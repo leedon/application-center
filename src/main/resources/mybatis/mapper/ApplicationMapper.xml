@@ -3,11 +3,11 @@
 
 <mapper namespace="io.github.rollenholt.application.center.base.dao.ApplicationMapper">
 
-    <select id="findById" parameterType="int" resultType="io.github.rollenholt.application.center.base.model.Application">
+    <select id="findById" parameterType="int"
+            resultType="io.github.rollenholt.application.center.base.model.Application">
         SELECT
         id,
         name,
-        code,
         team_id as teamId,
         creator,
         create_time as createTime,
@@ -18,11 +18,11 @@
         where id = #{value}
     </select>
 
-    <select id="queryByApplicationCode" parameterType="String" resultType="io.github.rollenholt.application.center.base.model.Application">
+    <select id="queryByApplicationCode" parameterType="int"
+            resultType="io.github.rollenholt.application.center.base.model.Application">
         SELECT
         id,
         name,
-        code,
         team_id as teamId,
         creator,
         create_time as createTime,
@@ -30,14 +30,13 @@
         email_group as emailGroup
         FROM
         application
-        where code = #{applicationCode}
+        where id = #{applicationCode}
     </select>
 
     <select id="list" resultType="io.github.rollenholt.application.center.base.model.ApplicationVo">
         SELECT
         a.id,
         a.name,
-        a.code,
         a.team_id as teamId,
         t.name as teamName,
         a.creator,
@@ -51,10 +50,9 @@
     </select>
 
     <insert id="createApplication" parameterType="io.github.rollenholt.application.center.base.model.Application"
-            useGeneratedKeys="true" keyColumn="id" >
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into application(
         name,
-        code,
         team_id,
         creator,
         create_time,
@@ -62,7 +60,6 @@
         email_group
         ) values (
         #{name},
-        #{code},
         #{teamId},
         #{creator},
         #{createTime},
@@ -84,10 +81,21 @@
                 email_group = #{emailGroup}
             </if>
         </set>
-        where code = #{code}
+        where id = #{id}
     </update>
 
     <update id="approveApply" parameterType="int">
-      update application set state = #{state} where code = #{applicationCode}
+      update application set state = #{state} where id = #{id}
     </update>
+
+    <insert id="saveApplicationDeveloper">
+        insert into application_developer(application_id, developer) values
+        <foreach collection="developers" item="item" index="index" separator=",">
+            (#{application.id}, #{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteApplicationDeveloper" parameterType="int">
+        delete from application_developer where application_id = #{value}
+    </delete>
 </mapper>

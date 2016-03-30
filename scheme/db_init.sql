@@ -6,17 +6,15 @@ set names utf8mb4;
 
 drop table if exists application;
 create table application(
-  id int(10) unsigned not null AUTO_INCREMENT comment '没有任何业务含义的主键',
+  id int(10) unsigned not null AUTO_INCREMENT comment '应用id',
   name varchar(32) not null comment '应用名称',
-  code varchar(64) not null comment '应用编号',
   team_id tinyint(4) not null comment '部门编号',
   email_group varchar(32) not null comment '部门邮件组',
   creator varchar(32) not null comment '应用创建人',
   create_time datetime not null comment '应用创建时间',
   state tinyint(4) not null comment '应用申请状态',
   PRIMARY KEY (id),
-  key idx_team_code(team_id),
-  unique key idx_code(code)
+  key idx_team_code(team_id)
 )engine=innodb default charset=utf8mb4 comment '应用表';
 
 drop table if exists team_dict;
@@ -43,10 +41,10 @@ insert into application_apply_state_dict(id, code, name) values (3, 'approval_re
 drop table if exists application_developer;
 create table application_developer(
   id int(10) unsigned not null AUTO_INCREMENT comment '没有任何业务含义的主键',
-  application_code varchar(64) not null comment '应用编号',
+  application_id int(10) not null comment '应用编号',
   developer varchar(32) not null comment '开发者名称',
   PRIMARY KEY (id),
-  key idx_application_code(application_code)
+  key idx_application_code(application_id)
 )engine=innodb default charset=utf8mb4 comment '应用和开发者的关联表';
 
 
@@ -76,10 +74,10 @@ insert into data_state_dict(id, code, name) values (2, 'disable', '未启用');
 drop table if exists application_operation_log;
 create table application_operation_log(
   id int(10) UNSIGNED not null AUTO_INCREMENT,
-  application_code varchar(64) not null comment '应用编号',
+  application_id int(10) not null comment '应用编号',
   operator varchar(32) not null comment '操作人',
   operate_time datetime not null comment '操作时间',
   detail text not null comment '操作详情',
   PRIMARY KEY (id),
-  key idx_application_code(application_code)
-)engine=innodb default charset=utf8 comment 'operation log table';
+  key idx_application_code(application_id)
+)engine=innodb default charset=utf8 comment '操作日志表';

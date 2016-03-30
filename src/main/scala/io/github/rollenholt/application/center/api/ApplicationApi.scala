@@ -9,7 +9,6 @@ import io.github.rollenholt.application.center.base.model.{Application, Applicat
 import io.github.rollenholt.application.center.base.service.ApplicationService
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Controller
-import org.springframework.validation.annotation.Validated
 import org.springframework.validation.{BindingResult, ObjectError}
 import org.springframework.web.bind.annotation._
 
@@ -17,8 +16,8 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable
 
 /**
- * @author rollenholt 
- */
+  * @author rollenholt
+  */
 @Controller
 @RequestMapping(value = Array("/api/application"))
 class ApplicationApi {
@@ -31,7 +30,7 @@ class ApplicationApi {
 
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def createApplication(@RequestBody @Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+  def createApplication(@RequestBody @Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[Int] = {
     logger.debug("接收到参数：{}", application)
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
@@ -39,28 +38,29 @@ class ApplicationApi {
       })
       new JsonV2(-1, "argument error", errors)
     }
-
     //init some property
     application.creator = "system"
     application.createTime = new Date()
-    application.state = ApplicationState.Unreviewed.id
+    application.state = ApplicationState.waitingApproval.id
 
     applicationService.createApplication(application)
-    new JsonV2(0, "ok", application.code)
+
+
+    new JsonV2(0, "ok", application.id)
   }
 
-  @RequestMapping(value = Array("/detail/{applicationCode}"), method = Array(RequestMethod.GET))
+  @RequestMapping(value = Array("/detail/{applicationId}"), method = Array(RequestMethod.GET))
   @ResponseBody
-  def applicationDetail(@PathVariable("applicationCode") applicationCode: String): JsonV2[ApplicationVo] = {
+  def applicationDetail(@PathVariable("applicationId") applicationCode: Int): JsonV2[ApplicationVo] = {
     logger.info("接收到参数:{}", applicationCode)
-    val application:Application = applicationService.queryApplicationDetail(applicationCode)
+    val application: Application = applicationService.queryApplicationDetail(applicationCode)
     val applicationVo: ApplicationVo = Application.toApplicationVo(application)
     new JsonV2[ApplicationVo](0, "查询应用信息成功", applicationVo)
   }
 
   @RequestMapping(value = Array("/modify"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def modifyApplication(@Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+  def modifyApplication(@RequestBody @Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[Int] = {
     logger.info("接收到参数：{}", application)
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
@@ -69,7 +69,7 @@ class ApplicationApi {
       new JsonV2(-1, "argument error", errors)
     }
     applicationService.modifyApplication(application)
-    new JsonV2(0, "ok", application.code)
+    new JsonV2(0, "ok", application.id)
   }
 
 
