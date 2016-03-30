@@ -2,6 +2,7 @@ package io.github.rollenholt.application.center.api
 
 import java.util.Date
 import javax.annotation.Resource
+import javax.validation.Valid
 
 import com.rollenholt.pear.pojo.JsonV2
 import io.github.rollenholt.application.center.base.model.{Application, ApplicationState, ApplicationVo}
@@ -30,7 +31,7 @@ class ApplicationApi {
 
   @RequestMapping(value = Array("/create"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def createApplication(@Validated application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+  def createApplication(@RequestBody @Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
     logger.debug("接收到参数：{}", application)
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
@@ -59,7 +60,7 @@ class ApplicationApi {
 
   @RequestMapping(value = Array("/modify"), method = Array(RequestMethod.POST))
   @ResponseBody
-  def modifyApplication(@Validated application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
+  def modifyApplication(@Valid application: ApplicationVo, bindingResult: BindingResult): JsonV2[String] = {
     logger.info("接收到参数：{}", application)
     if (bindingResult.hasErrors) {
       val errors: mutable.Buffer[String] = bindingResult.getAllErrors.map((error: ObjectError) => {
